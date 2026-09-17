@@ -16,7 +16,7 @@ export default function SiteLayout() {
   const lenisRef = useRef(null);
 
   useEffect(() => {
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true, syncTouch: false, autoRaf: false });
+    const lenis = new Lenis({ duration: 1.25, smoothWheel: true, smoothTouch: true, wheelMultiplier: 0.92, touchMultiplier: 1.0, autoRaf: false });
     lenisRef.current = lenis;
     const raf = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(raf);
@@ -50,5 +50,5 @@ export default function SiteLayout() {
     return () => { window.removeEventListener("load", refresh); window.clearTimeout(timer); window.clearTimeout(setupTimer); revealTriggers.forEach((trigger) => trigger.kill()); themeTriggers.forEach((trigger) => trigger.kill()); };
   }, [location.pathname]);
 
-  return <><Crosshair /><Navbar /><AnimatePresence mode="wait" initial={false}><PageTransition key={location.pathname}><Outlet /></PageTransition></AnimatePresence><Footer /><div className="corner-badge" data-testid="corner-badge" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="badge-circle-path" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" /></defs><g className="badge-ring"><text className="badge-text"><textPath href="#badge-circle-path">PRECISION GRADE • ISO-ALIGNED MANUFACTURING • EST. 1998 • </textPath></text></g><g className="badge-cross"><line x1="50" y1="39" x2="50" y2="61" /><line x1="39" y1="50" x2="61" y2="50" /><circle cx="50" cy="50" r="8" /></g></svg></div></>;
+  return <><Crosshair /><Navbar /><AnimatePresence mode="wait" initial={false}><PageTransition key={location.pathname}><Outlet /></PageTransition></AnimatePresence><Footer /><div className="corner-badge" data-testid="corner-badge" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><path id="badge-circle-path" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" /></defs><g className="badge-ring"><text className="badge-text"><textPath href="#badge-circle-path">VPI • PRECISION ENGINEERING • MYSORE • </textPath></text></g><g className="badge-cross"><line x1="50" y1="39" x2="50" y2="61" /><line x1="39" y1="50" x2="61" y2="50" /><circle cx="50" cy="50" r="8" /></g></svg></div></>;
 }

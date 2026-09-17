@@ -1,114 +1,161 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import * as THREE from "three";
+import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const stages = [
-  { number: "01", title: "Assembled view", copy: "VG-20 CNC collet chuck shown in its complete assembled form for an immediate product reference." },
-  { number: "02", title: "Inspection angle", copy: "Scroll to turn the product through a controlled presentation angle while keeping the original VPI product image visible." },
-  { number: "03", title: "Precision detail", copy: "A closer inspection view highlights the knurled grip, machined body, spindle-side geometry, and finished surfaces." },
-  { number: "04", title: "Final orientation", copy: "The product settles into its final inspection angle, ready for the next section of the VPI product story." },
-];
-
 export default function PrecisionScene() {
   const sectionRef = useRef(null);
-  const imageRef = useRef(null);
-  const productFrameRef = useRef(null);
-  const [stage, setStage] = useState(0);
-  const [angle, setAngle] = useState(0);
+  const canvasRef = useRef(null);
+  const sceneState = useRef({ rotation: 0, targetRotation: 0, dragRotation: 0 });
+  const [degrees, setDegrees] = useState(0);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const image = imageRef.current;
-    const frame = productFrameRef.current;
-    if (!section || !image || !frame) return undefined;
+    const canvas = canvasRef.current;
+    if (!section || !canvas) return undefined;
 
-    const media = gsap.matchMedia();
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
 
-    media.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.set(image, {
-          x: 0,
-          y: 0,
-          scale: 0.9,
-          rotation: 0,
-          rotationY: 0,
-          transformPerspective: 1400,
-          transformOrigin: "50% 50%",
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 2000);
+    camera.position.set(310, -310, 185);
+
+    const root = new THREE.Group();
+    scene.add(root);
+
+    const ambient = new THREE.HemisphereLight(0xa9bec9, 0x10161b, 2.2);
+    scene.add(ambient);
+    const key = new THREE.DirectionalLight(0xffffff, 4.2);
+    key.position.set(240, -180, 360);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0x00e5ff, 1.35);
+    fill.position.set(-260, 90, 120);
+    scene.add(fill);
+    const rim = new THREE.PointLight(0x00e5ff, 75, 700, 2);
+    rim.position.set(-140, -80, 120);
+    scene.add(rim);
+
+    const ground = new THREE.Mesh(
+      new THREE.CircleGeometry(150, 64),
+      new THREE.MeshBasicMaterial({ color: 0x071015, transparent: true, opacity: 0.55 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -92;
+    scene.add(ground);
+
+    let product = null;
+    let disposed = false;
+    const loader = new STLLoader();
+    loader.load(
+      "/vpi/vg20-a6-60.stl",
+      (geometry) => {
+        if (disposed) return;
+        geometry.computeBoundingBox();
+        geometry.computeVertexNormals();
+        geometry.center();
+        const material = new THREE.MeshPhysicalMaterial({
+          color: 0xb8c0c4,
+          metalness: 0.96,
+          roughness: 0.22,
+          clearcoat: 0.32,
+          clearcoatRoughness: 0.16,
         });
+        product = new THREE.Mesh(geometry, material);
+        product.rotation.x = Math.PI / 2;
+        product.scale.setScalar(1.22);
+        root.add(product);
+      },
+      undefined,
+      () => {
+        // Keep the section usable even if the 3D asset is unavailable.
+      }
+    );
 
-        gsap.set(frame, {
-          rotateX: 0,
-          rotateY: -5,
-          scale: 0.96,
-        });
+    const target = new THREE.Vector3(0, 0, 0);
+    const resize = () => {
+      const width = section.clientWidth;
+      const height = Math.max(section.clientHeight, window.innerHeight);
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-            onUpdate: (self) => {
-              const progress = self.progress;
-              setStage(Math.min(3, Math.floor(progress * 4)));
-              setAngle(Math.round(progress * 22));
-            },
-          },
-        });
+    let lastDegree = -1;
+    const updateDegree = () => {
+      const raw = ((sceneState.current.rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+      const nextDegree = Math.round((raw / (Math.PI * 2)) * 360) % 360;
+      if (nextDegree !== lastDegree) {
+        lastDegree = nextDegree;
+        setDegrees(nextDegree);
+      }
+    };
 
-        tl.to(frame, { rotateY: 2, scale: 0.99, ease: "none", duration: 0.28 }, 0);
-        tl.to(image, { scale: 1.01, rotation: 2, x: -10, y: 0, ease: "none", duration: 0.25 }, 0);
-        tl.to(frame, { rotateY: 6, rotateX: 1.5, scale: 1.02, ease: "none", duration: 0.25 }, 0.25);
-        tl.to(image, { scale: 1.07, rotation: -2, x: 6, y: -8, ease: "none", duration: 0.25 }, 0.25);
-        tl.to(frame, { rotateY: 10, rotateX: 2.5, scale: 1.05, ease: "none", duration: 0.25 }, 0.5);
-        tl.to(image, { scale: 1.13, rotation: 3, x: -8, y: 4, ease: "none", duration: 0.25 }, 0.5);
-        tl.to(frame, { rotateY: 14, rotateX: 3.5, scale: 1.08, ease: "none", duration: 0.25 }, 0.75);
-        tl.to(image, { scale: 1.18, rotation: -1, x: 10, y: -2, ease: "none", duration: 0.25 }, 0.75);
-      }, section);
-
-      return () => ctx.revert();
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1.15,
+      onUpdate: (self) => {
+        sceneState.current.targetRotation = self.progress * Math.PI * 2;
+      },
     });
 
-    media.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
-      gsap.set(image, { scale: 0.95, rotation: 0 });
-      gsap.set(frame, { rotateY: 0, scale: 0.98 });
+    let dragging = false;
+    let previousX = 0;
+    const down = (event) => { dragging = true; previousX = event.clientX; canvas.setPointerCapture?.(event.pointerId); };
+    const move = (event) => {
+      if (!dragging) return;
+      const delta = event.clientX - previousX;
+      previousX = event.clientX;
+      sceneState.current.dragRotation += delta * 0.01;
+    };
+    const up = () => { dragging = false; };
+    canvas.addEventListener("pointerdown", down);
+    canvas.addEventListener("pointermove", move);
+    canvas.addEventListener("pointerup", up);
+    canvas.addEventListener("pointercancel", up);
+    canvas.addEventListener("pointerleave", up);
 
-      const onUpdate = (self) => {
-        const progress = self.progress;
-        setStage(Math.min(3, Math.floor(progress * 4)));
-        setAngle(Math.round(progress * 14));
-      };
+    const tick = () => {
+      if (disposed) return;
+      const state = sceneState.current;
+      const desired = state.targetRotation + state.dragRotation;
+      state.rotation += (desired - state.rotation) * 0.1;
+      if (product) {
+        product.rotation.y = state.rotation;
+        product.rotation.x = Math.PI / 2 + Math.sin(state.rotation * 0.5) * 0.035;
+        product.position.y = Math.sin(state.rotation * 0.5) * 1.2;
+      }
+      camera.lookAt(target);
+      renderer.render(scene, camera);
+      updateDegree();
+      frame = requestAnimationFrame(tick);
+    };
+    let frame = requestAnimationFrame(tick);
 
-      const trigger = ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-        onUpdate,
-      });
-
-      gsap.to(image, {
-        scale: 1.03,
-        rotation: 5,
-        duration: 1,
-        scrollTrigger: { trigger: section, start: "top top", end: "bottom bottom", scrub: true },
-        ease: "none",
-      });
-
-      gsap.to(frame, {
-        rotateY: 8,
-        scale: 1.02,
-        duration: 1,
-        scrollTrigger: { trigger: section, start: "top top", end: "bottom bottom", scrub: true },
-        ease: "none",
-      });
-
-      return () => trigger.kill();
-    });
-
-    return () => media.revert();
+    return () => {
+      disposed = true;
+      trigger.kill();
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("pointerdown", down);
+      canvas.removeEventListener("pointermove", move);
+      canvas.removeEventListener("pointerup", up);
+      canvas.removeEventListener("pointercancel", up);
+      canvas.removeEventListener("pointerleave", up);
+      product?.geometry.dispose();
+      product?.material.dispose();
+      renderer.dispose();
+    };
   }, []);
 
   return (
@@ -116,34 +163,28 @@ export default function PrecisionScene() {
       <div className="scene-sticky">
         <div className="scene-label">
           <span>VPI CNC COLLET CHUCK / VG-20</span>
-          <span>SCROLL TO ROTATE</span>
+          <span>SCROLL TO ROTATE / DRAG TO INSPECT</span>
         </div>
 
         <div className="collet-visual" aria-hidden="true">
           <div className="collet-grid-panel" />
           <div className="collet-glow" />
-          <div ref={productFrameRef} className="collet-product-frame">
+          <div className="collet-product-frame collet-3d-frame">
+            <canvas ref={canvasRef} className="precision-canvas" />
             <div className="product-frame-topline">VG-20 A6-60 / VPI INNOVATIVE SOLUTIONS</div>
-            <img
-              ref={imageRef}
-              className="collet-assembled-image"
-              src="/vpi/vg20-assembled-cutout.png"
-              alt="VPI VG-20 CNC Collet Chuck"
-            />
-            <div className="product-frame-reflection" />
-            <div className="product-frame-corner">PRECISION / VG-20</div>
+            <div className="product-frame-corner">360° PRODUCT INSPECTION</div>
           </div>
           <div className="collet-scanline" />
         </div>
 
-        <div className="scene-axis axis-x">ROTATION + {String(angle).padStart(2, "0")}°</div>
-        <div className="scene-axis axis-y">Y + 000.000</div>
+        <div className="scene-axis axis-x">ROTATION {String(degrees).padStart(3, "0")}°</div>
+        <div className="scene-axis axis-y">AXIS Z / PRODUCT CENTERLINE</div>
 
         <div className="scene-stage-copy" data-testid="precision-rotation-callout">
-          <span className="eyebrow cyan">STAGE {stages[stage].number} / 04</span>
-          <h3>{stages[stage].title}</h3>
-          <p>{stages[stage].copy}</p>
-          <div className="stage-progress"><span style={{ width: `${((stage + 1) / 4) * 100}%` }} /></div>
+          <span className="eyebrow cyan">VG-20 / 360° VIEW</span>
+          <h3>Precision from every angle.</h3>
+          <p>Scroll through a complete 360° inspection of the VPI VG-20 CNC Collet Chuck.</p>
+          <div className="stage-progress"><span style={{ width: `${Math.max(4, (degrees / 360) * 100)}%` }} /></div>
         </div>
 
         <div className="scene-legend"><span className="legend-dot" />VPI / VG-20 CNC COLLET CHUCK</div>

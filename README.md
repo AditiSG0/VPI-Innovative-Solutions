@@ -1,6 +1,19 @@
-# VPI Innovative Solutions - Emergent Industrial Rebuild
+# VPI Innovative Solutions - Futuristic Industrial Website
 
-React 19 + CRACO + React Router website for VPI Innovative Solutions. The visual language follows the dark industrial Emergent build while the main VPI copy, contact details, product references and management content are sourced from the VPI website.
+React + CRACO project using a futuristic industrial visual system with VPI Innovative Solutions as the content/source reference.
+
+## Included updates
+
+- VPI page structure, routes, product/service content, company information, media entries, career information, and contact details retained and presented in the new visual system.
+- Futuristic industrial visual system with technical grid, cyan accents, page transitions, hover states, and scroll reveals.
+- Smooth scrolling powered by Lenis and GSAP ScrollTrigger.
+- Coordinate cursor/crosshair effect on desktop.
+- Featured homepage industry imagery supplied for Robotics, Medical, Electronics, Automotive, and Aerospace.
+- Homepage VPI hero uses VPI CNC/product imagery and scroll-driven visual movement rather than the previous people image.
+- VG-20 product section uses the supplied STL for a scroll-controlled 360-degree assembled product inspection.
+- Media page retains the VPI VG-20 product story/image.
+- Footer keeps VPI address, contact details, Google Maps location, Make in India graphic, and social links.
+- Repeated "OUR VISION" content was removed from the global footer; the full Vision content remains on the appropriate homepage/company-vision page.
 
 ## Run locally
 
@@ -9,21 +22,12 @@ yarn install
 yarn start
 ```
 
-## Production build
+Production build:
 
 ```bash
 yarn build
 ```
 
-## Deploy on Vercel
+## Vercel
 
-1. Push the contents of this folder to the root of the existing GitHub repository.
-2. Keep the repository's `.git` directory untouched when replacing local files with GitHub Desktop.
-3. Vercel will build automatically from the connected `main` branch.
-
-## Notable implementation details
-
-- The homepage hero uses VPI-specific CNC/product imagery only, with no people, and moves/crossfades in response to scroll.
-- The VG-20 CNC Collet Chuck section uses the supplied product image as a scroll-driven rotation/inspection interaction.
-- `/management`, `/management-2`, and `/management-2/` route to a dedicated Management page styled to match the industrial system.
-- The footer includes the VPI logo, VPI vision, address, contact details, sitemap, Make in India graphic and an embedded location map.
+The project is configured for the existing Create React App / CRACO setup. Keep the repository root as the Vercel root directory and deploy from the connected Git branch.
