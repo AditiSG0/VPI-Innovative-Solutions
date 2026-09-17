@@ -7,16 +7,6 @@ const mapSrc = 'https://www.google.com/maps?q=Ksetra+Tech+Park+Koorgalli+Industr
 export default function Footer() {
   return (
     <footer className="site-footer site-footer-vpi page-pad" data-theme="black" data-testid="site-footer">
-      <div className="footer-vision-panel">
-        <div>
-          <span className="footer-kicker">OUR VISION</span>
-          <p>We empower industries with smart, sustainable, and forward-thinking solutions.<br />By integrating innovation with responsibility, we drive meaningful progress.<br />Our approach combines technology, efficiency, and environmental care.<br />Together, we’re building a better, brighter, and more resilient tomorrow.</p>
-        </div>
-        <Link to="/" className="footer-brand" aria-label="VPI Innovative Solutions home">
-          <img src="https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/vpi_logo_transparent_highres.png" alt="VPI Innovative Solutions" className="footer-logo-image" />
-          <span>VPI Innovative Solutions</span>
-        </Link>
-      </div>
 
       <div className="footer-main-grid">
         <div className="footer-column">
@@ -41,6 +31,13 @@ export default function Footer() {
           <div className="footer-map-head"><span className="footer-kicker">LOCATION</span><a href="https://www.google.com/maps/search/?api=1&query=Ksetra+Tech+Park+Koorgalli+Industrial+Area+Mysore+570018" target="_blank" rel="noreferrer">OPEN MAP <ArrowUpRight size={13} /></a></div>
           <iframe title="VPI Innovative Solutions location" src={mapSrc} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
         </div>
+      </div>
+
+      <div className="footer-lower-brand">
+        <Link to="/" className="footer-brand" aria-label="VPI Innovative Solutions home">
+          <img src="https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/vpi_logo_transparent_highres.png" alt="VPI Innovative Solutions" className="footer-logo-image" />
+          <span>VPI Innovative Solutions</span>
+        </Link>
       </div>
 
       <div className="footer-lower">

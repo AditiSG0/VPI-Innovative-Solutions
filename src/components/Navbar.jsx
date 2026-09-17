@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/motion";
 
 const companyLinks = [["About us", "/about"], ["Management", "/management"], ["CSR", "/csr"], ["Company vision", "/vision"], ["Company history", "/history"], ["Why us", "/why-us"], ["R&D", "/rd"]];
-const industryLinks = [["Automotive", "/industries/automotive"], ["Electronics", "/industries/electronics"], ["Robotics", "/industries/robotics"], ["Medical", "/industries/medical"], ["Die & mould", "/industries/die-mould"], ["Energy", "/industries/energy"], ["Food", "/industries/food"], ["Advanced critical R&D", "/industries/critical-rd"], ["Telecom", "/industries/telecom"]];
+const industryLinks = [["Automotive", "/industries/automotive"], ["Electronics", "/industries/electronics"], ["Robotics", "/industries/robotics"], ["Medical", "/industries/medical"], ["Aerospace", "/industries/aerospace"]];
 
 function Dropdown({ label, links, menuKey, openMenu, setOpenMenu }) {
   const isOpen = openMenu === menuKey;
-  return <div className="nav-dropdown-wrap"><button className="nav-link" data-testid={`${menuKey}-menu-button`} onClick={() => setOpenMenu(isOpen ? null : menuKey)}>{label} <ChevronDown size={13} /></button>{isOpen && <div className={`nav-dropdown ${menuKey === "industries" ? "industries-dropdown" : ""}`} data-testid={`${menuKey}-menu`}><span className="dropdown-kicker">{menuKey === "company" ? "VPI / COMPANY" : "SECTORS / 09"}</span>{links.map(([item, path]) => <NavLink key={path} to={path} data-testid={`${menuKey}-link-${item.toLowerCase().replaceAll(" ", "-")}`}>{item}</NavLink>)}</div>}</div>;
+  return <div className="nav-dropdown-wrap"><button className="nav-link" data-testid={`${menuKey}-menu-button`} onClick={() => setOpenMenu(isOpen ? null : menuKey)}>{label} <ChevronDown size={13} /></button>{isOpen && <div className={`nav-dropdown ${menuKey === "industries" ? "industries-dropdown" : ""}`} data-testid={`${menuKey}-menu`}><span className="dropdown-kicker">{menuKey === "company" ? "VPI / COMPANY" : "SECTORS / 05"}</span>{links.map(([item, path]) => <NavLink key={path} to={path} data-testid={`${menuKey}-link-${item.toLowerCase().replaceAll(" ", "-")}`}>{item}</NavLink>)}</div>}</div>;
 }
 
 export default function Navbar() {
