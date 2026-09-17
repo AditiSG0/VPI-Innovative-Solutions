@@ -1,6 +1,6 @@
-# VPI Innovative Solutions - Emergent Industrial Rebuild
+# VPI Industrial Website
 
-React 19 + CRACO + React Router website for VPI Innovative Solutions. The visual language follows the dark industrial Emergent build while the main VPI copy, contact details, product references and management content are sourced from the VPI website.
+React 19 + CRACO + React Router website for VPI Innovative Solutions.
 
 ## Run locally
 
@@ -15,21 +15,14 @@ yarn start
 yarn build
 ```
 
-## Deploy on Vercel
+## Deploy
 
-1. Push the contents of this folder to the root of the existing GitHub repository.
-2. Keep the repository's `.git` directory untouched when replacing local files with GitHub Desktop.
-3. Vercel will build automatically from the connected `main` branch.
+Upload the contents of this folder to the root of your GitHub repository. The app uses Create React App/CRACO and can be deployed on Vercel, Netlify, or GitHub Pages with the appropriate SPA fallback configuration.
 
-## Notable implementation details
+## Main source files
 
-- The homepage hero uses VPI-specific CNC/product imagery only, with no people, and moves/crossfades in response to scroll.
-- The VG-20 CNC Collet Chuck section uses the supplied product image as a scroll-driven rotation/inspection interaction.
-- `/management`, `/management-2`, and `/management-2/` route to a dedicated Management page styled to match the industrial system.
-- The footer includes the VPI logo, VPI vision, address, contact details, sitemap, Make in India graphic and an embedded location map.
-
-## Product interaction
-The VG-20 product section uses the supplied VPI photographs (`public/vpi/vg20-angle-1.jpg` and `public/vpi/vg20-angle-2.jpg`) and a scroll-driven inspection/rotation transition. No exploded-view artwork is used.
-
-## Content and imagery
-The site's VPI copy, contact details, product information, industry information, and page structure are based on the current VPI Innovative Solutions website. The Emergent project supplies the visual presentation, interaction style, and animations.
+- `src/App.js` routes the site
+- `src/pages/SitePages.jsx` contains page content/layout
+- `src/App.css` contains the industrial visual system and animations
+- `src/components/` contains navigation, transitions, scenes and reusable sections
+- `public/` contains local site assets
