@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root { --background: 220 12% 5%; --foreground: 210 20% 96%; --border: 220 10% 18%; --radius: 0; }
+:root { --background: 0 0% 100%; --foreground: 218 28% 14%; --border: 220 15% 86%; --radius: 0.25rem; }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: #0d0d0f; overflow-x: clip; }
-body { margin: 0; min-width: 320px; background: #0d0d0f; color: #f3f4f6; font-family: 'Manrope', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+html { scroll-behavior: auto; background: #ffffff; overflow-x: clip; }
+body { margin: 0; min-width: 320px; background: #ffffff; color: #18202a; font-family: 'Montserrat', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 button, input, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
-::selection { background: #00e5ff; color: #071012; }
+::selection { background: #ffbd17; color: #101828; }

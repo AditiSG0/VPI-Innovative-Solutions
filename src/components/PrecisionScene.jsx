@@ -1,193 +1,155 @@
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function PrecisionScene() {
   const sectionRef = useRef(null);
-  const canvasRef = useRef(null);
-  const sceneState = useRef({ rotation: 0, targetRotation: 0, dragRotation: 0 });
-  const [degrees, setDegrees] = useState(0);
+  const mountRef = useRef(null);
+  const angleRef = useRef(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const canvas = canvasRef.current;
-    if (!section || !canvas) return undefined;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    const mount = mountRef.current;
+    if (!section || !mount) return undefined;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 2000);
-    camera.position.set(310, -310, 185);
+    scene.background = new THREE.Color(0xf4f6f8);
 
-    const root = new THREE.Group();
-    scene.add(root);
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 1000);
+    camera.position.set(0, 0.8, 6.6);
 
-    const ambient = new THREE.HemisphereLight(0xa9bec9, 0x10161b, 2.2);
-    scene.add(ambient);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    mount.appendChild(renderer.domElement);
+
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x243041, 2.2);
+    scene.add(hemi);
     const key = new THREE.DirectionalLight(0xffffff, 4.2);
-    key.position.set(240, -180, 360);
+    key.position.set(3, 5, 5);
+    key.castShadow = true;
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0x00e5ff, 1.35);
-    fill.position.set(-260, 90, 120);
-    scene.add(fill);
-    const rim = new THREE.PointLight(0x00e5ff, 75, 700, 2);
-    rim.position.set(-140, -80, 120);
+    const rim = new THREE.DirectionalLight(0x3ddcff, 2.4);
+    rim.position.set(-4, 1, -5);
     scene.add(rim);
+    const fill = new THREE.DirectionalLight(0xffc14a, 1.2);
+    fill.position.set(2, -2, 4);
+    scene.add(fill);
 
-    const ground = new THREE.Mesh(
-      new THREE.CircleGeometry(150, 64),
-      new THREE.MeshBasicMaterial({ color: 0x071015, transparent: true, opacity: 0.55 })
-    );
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -92;
-    scene.add(ground);
+    const stage = new THREE.Group();
+    scene.add(stage);
 
-    let product = null;
-    let disposed = false;
     const loader = new STLLoader();
-    loader.load(
-      "/vpi/vg20-a6-60.stl",
-      (geometry) => {
-        if (disposed) return;
-        geometry.computeBoundingBox();
-        geometry.computeVertexNormals();
-        geometry.center();
-        const material = new THREE.MeshPhysicalMaterial({
-          color: 0xb8c0c4,
-          metalness: 0.96,
-          roughness: 0.22,
-          clearcoat: 0.32,
-          clearcoatRoughness: 0.16,
-        });
-        product = new THREE.Mesh(geometry, material);
-        product.rotation.x = Math.PI / 2;
-        product.scale.setScalar(1.22);
-        root.add(product);
-      },
-      undefined,
-      () => {
-        // Keep the section usable even if the 3D asset is unavailable.
-      }
-    );
+    loader.load("/vpi/VG20_A6_60.stl", (geometry) => {
+      geometry.computeBoundingBox();
+      geometry.computeVertexNormals();
+      const center = new THREE.Vector3();
+      geometry.boundingBox?.getCenter(center);
+      geometry.translate(-center.x, -center.y, -center.z);
+      const size = new THREE.Vector3();
+      geometry.boundingBox?.getSize(size);
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      const scale = 3.5 / maxDim;
+      const material = new THREE.MeshPhysicalMaterial({
+        color: 0xc9d1d7,
+        metalness: 0.92,
+        roughness: 0.22,
+        clearcoat: 0.42,
+        clearcoatRoughness: 0.18,
+        reflectivity: 0.9,
+      });
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.scale.setScalar(scale);
+      mesh.rotation.x = Math.PI / 2;
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      stage.add(mesh);
 
-    const target = new THREE.Vector3(0, 0, 0);
+      const base = new THREE.Mesh(
+        new THREE.CylinderGeometry(2.45, 2.45, 0.08, 96),
+        new THREE.MeshStandardMaterial({ color: 0x111a23, metalness: 0.7, roughness: 0.32 })
+      );
+      base.position.y = -2.02;
+      base.castShadow = true;
+      base.receiveShadow = true;
+      stage.add(base);
+    });
+
     const resize = () => {
-      const width = section.clientWidth;
-      const height = Math.max(section.clientHeight, window.innerHeight);
-      renderer.setSize(width, height, false);
+      const rect = mount.getBoundingClientRect();
+      const width = Math.max(1, rect.width);
+      const height = Math.max(1, rect.height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      renderer.setSize(width, height, false);
     };
-    resize();
-    window.addEventListener("resize", resize);
 
-    let lastDegree = -1;
-    const updateDegree = () => {
-      const raw = ((sceneState.current.rotation % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-      const nextDegree = Math.round((raw / (Math.PI * 2)) * 360) % 360;
-      if (nextDegree !== lastDegree) {
-        lastDegree = nextDegree;
-        setDegrees(nextDegree);
-      }
+    const onPointerMove = (event) => {
+      if (!stage) return;
+      const rect = mount.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width - 0.5;
+      const py = (event.clientY - rect.top) / rect.height - 0.5;
+      stage.rotation.x = THREE.MathUtils.lerp(stage.rotation.x, -py * 0.18, 0.08);
+      stage.rotation.z = THREE.MathUtils.lerp(stage.rotation.z, px * 0.12, 0.08);
     };
+
+    mount.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("resize", resize);
+    resize();
 
     const trigger = ScrollTrigger.create({
       trigger: section,
       start: "top top",
       end: "bottom bottom",
-      scrub: 1.15,
+      scrub: 1.05,
       onUpdate: (self) => {
-        sceneState.current.targetRotation = self.progress * Math.PI * 2;
+        const turns = self.progress * Math.PI * 2;
+        stage.rotation.y = turns;
+        if (angleRef.current) angleRef.current.textContent = `${Math.round(self.progress * 360)}°`;
       },
     });
 
-    let dragging = false;
-    let previousX = 0;
-    const down = (event) => { dragging = true; previousX = event.clientX; canvas.setPointerCapture?.(event.pointerId); };
-    const move = (event) => {
-      if (!dragging) return;
-      const delta = event.clientX - previousX;
-      previousX = event.clientX;
-      sceneState.current.dragRotation += delta * 0.01;
-    };
-    const up = () => { dragging = false; };
-    canvas.addEventListener("pointerdown", down);
-    canvas.addEventListener("pointermove", move);
-    canvas.addEventListener("pointerup", up);
-    canvas.addEventListener("pointercancel", up);
-    canvas.addEventListener("pointerleave", up);
-
-    const tick = () => {
-      if (disposed) return;
-      const state = sceneState.current;
-      const desired = state.targetRotation + state.dragRotation;
-      state.rotation += (desired - state.rotation) * 0.1;
-      if (product) {
-        product.rotation.y = state.rotation;
-        product.rotation.x = Math.PI / 2 + Math.sin(state.rotation * 0.5) * 0.035;
-        product.position.y = Math.sin(state.rotation * 0.5) * 1.2;
-      }
-      camera.lookAt(target);
+    let rafId = 0;
+    const render = () => {
       renderer.render(scene, camera);
-      updateDegree();
-      frame = requestAnimationFrame(tick);
+      rafId = requestAnimationFrame(render);
     };
-    let frame = requestAnimationFrame(tick);
+    render();
 
     return () => {
-      disposed = true;
+      cancelAnimationFrame(rafId);
       trigger.kill();
-      cancelAnimationFrame(frame);
+      mount.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("pointerdown", down);
-      canvas.removeEventListener("pointermove", move);
-      canvas.removeEventListener("pointerup", up);
-      canvas.removeEventListener("pointercancel", up);
-      canvas.removeEventListener("pointerleave", up);
-      product?.geometry.dispose();
-      product?.material.dispose();
+      if (renderer.domElement.parentNode === mount) mount.removeChild(renderer.domElement);
       renderer.dispose();
+      scene.traverse((obj) => {
+        if (obj.geometry) obj.geometry.dispose();
+        if (obj.material) {
+          if (Array.isArray(obj.material)) obj.material.forEach((m) => m.dispose());
+          else obj.material.dispose();
+        }
+      });
     };
   }, []);
 
   return (
-    <section ref={sectionRef} id="precision-rotation" className="scene-section collet-scene" data-theme="black" data-testid="precision-rotation-section">
-      <div className="scene-sticky">
-        <div className="scene-label">
-          <span>VPI CNC COLLET CHUCK / VG-20</span>
-          <span>SCROLL TO ROTATE / DRAG TO INSPECT</span>
+    <section ref={sectionRef} id="precision-rotation" className="scene-section collet-scene vpi-rotation-scene" data-testid="precision-rotation-section">
+      <div className="scene-sticky vpi-rotation-sticky">
+        <div className="vpi-rotation-copy">
+          <span className="eyebrow">VPI / VG-20 CNC COLLET CHUCK</span>
+          <h2>Rotate the<br /><em>product</em></h2>
+          <p>Scroll to inspect the VG-20 through a complete 360° rotation.</p>
+          <div className="vpi-rotation-meta"><span>SCROLL CONTROLLED</span><strong ref={angleRef}>0°</strong></div>
         </div>
-
-        <div className="collet-visual" aria-hidden="true">
-          <div className="collet-grid-panel" />
-          <div className="collet-glow" />
-          <div className="collet-product-frame collet-3d-frame">
-            <canvas ref={canvasRef} className="precision-canvas" />
-            <div className="product-frame-topline">VG-20 A6-60 / VPI INNOVATIVE SOLUTIONS</div>
-            <div className="product-frame-corner">360° PRODUCT INSPECTION</div>
-          </div>
-          <div className="collet-scanline" />
-        </div>
-
-        <div className="scene-axis axis-x">ROTATION {String(degrees).padStart(3, "0")}°</div>
-        <div className="scene-axis axis-y">AXIS Z / PRODUCT CENTERLINE</div>
-
-        <div className="scene-stage-copy" data-testid="precision-rotation-callout">
-          <span className="eyebrow cyan">VG-20 / 360° VIEW</span>
-          <h3>Precision from every angle.</h3>
-          <p>Scroll through a complete 360° inspection of the VPI VG-20 CNC Collet Chuck.</p>
-          <div className="stage-progress"><span style={{ width: `${Math.max(4, (degrees / 360) * 100)}%` }} /></div>
-        </div>
-
-        <div className="scene-legend"><span className="legend-dot" />VPI / VG-20 CNC COLLET CHUCK</div>
+        <div ref={mountRef} className="precision-canvas" aria-label="Interactive 360 degree VG-20 CNC Collet Chuck viewer" />
+        <div className="vpi-rotation-grid" aria-hidden="true" />
       </div>
     </section>
   );
