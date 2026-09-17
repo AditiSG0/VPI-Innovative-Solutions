@@ -1264,3 +1264,87 @@ body { font-family: 'Montserrat', sans-serif; }
 .footer-logo-image { display:block; width:auto; height:34px; }
 .footer-lower-brand .footer-brand span { font:600 12px var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--vpi-blue) !important; }
 @media (max-width: 560px){ .footer-lower-brand .footer-brand span{font-size:10px;} }
+
+
+/* =========================================================
+   VPI FINAL PALETTE PASS
+   Light gray / dark blue / black
+   ========================================================= */
+:root {
+  --vpi-blue: #0b2a4a;
+  --vpi-blue-2: #123f67;
+  --vpi-blue-3: #1d5b8d;
+  --vpi-gray-50: #f5f7f9;
+  --vpi-gray-100: #e8edf1;
+  --vpi-gray-200: #d7dfe6;
+  --vpi-gray-300: #c4cdd6;
+  --vpi-gray-500: #5f6c79;
+  --vpi-gray-700: #263342;
+  --vpi-black: #090f16;
+  --vpi-white: #ffffff;
+  --line: rgba(11,42,74,.14);
+}
+
+html, body { background: var(--vpi-gray-100) !important; color: var(--vpi-black) !important; }
+.site-shell { background: var(--vpi-gray-100) !important; color: var(--vpi-black) !important; }
+[data-theme="white"], [data-theme="steel"], [data-theme="gray"] { background: var(--vpi-gray-100) !important; color: var(--vpi-black) !important; }
+[data-theme="white"] h1, [data-theme="white"] h2, [data-theme="white"] h3,
+[data-theme="steel"] h1, [data-theme="steel"] h2, [data-theme="steel"] h3,
+[data-theme="gray"] h1, [data-theme="gray"] h2, [data-theme="gray"] h3 { color: var(--vpi-blue) !important; }
+[data-theme="white"] p, [data-theme="white"] span, [data-theme="white"] li,
+[data-theme="steel"] p, [data-theme="steel"] span, [data-theme="steel"] li,
+[data-theme="gray"] p, [data-theme="gray"] span, [data-theme="gray"] li { color: var(--vpi-gray-700) !important; }
+[data-theme="dark"], [data-theme="blue"] { background: var(--vpi-blue) !important; color: var(--vpi-white) !important; }
+[data-theme="black"] { background: var(--vpi-black) !important; color: var(--vpi-white) !important; }
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="blue"] h1, [data-theme="blue"] h2, [data-theme="blue"] h3, [data-theme="black"] h1, [data-theme="black"] h2, [data-theme="black"] h3 { color: var(--vpi-white) !important; }
+[data-theme="dark"] p, [data-theme="dark"] span, [data-theme="dark"] li, [data-theme="blue"] p, [data-theme="blue"] span, [data-theme="blue"] li, [data-theme="black"] p, [data-theme="black"] span, [data-theme="black"] li { color: #eef3f7 !important; }
+
+/* Keep the homepage hero / inner heroes dark blue with white type. */
+.home-hero, .hero-section, .inner-hero { background: var(--vpi-blue) !important; }
+.hero-section h1, .hero-section .hero-subhead, .hero-section .hero-bottom, .hero-section .eyebrow, .hero-section .hero-status, .hero-section .hero-kicker, .inner-hero-content h1, .inner-hero-content h1 em, .inner-hero-content > p { color: var(--vpi-white) !important; }
+.inner-hero-image div { background: linear-gradient(90deg, rgba(11,42,74,.91), rgba(11,42,74,.38)), linear-gradient(0deg, rgba(11,42,74,.72), transparent 55%) !important; }
+.hero-scrim { background: linear-gradient(90deg, rgba(11,42,74,.96) 0%, rgba(11,42,74,.68) 44%, rgba(11,42,74,.24) 100%), linear-gradient(0deg, rgba(11,42,74,.84), rgba(11,42,74,.10) 54%, rgba(11,42,74,.26)) !important; }
+
+/* White / gray surfaces stay readable with dark text. */
+.page-intro, .home-on-demand, .home-overview, .industry-overview, .roles-section, .culture-section, .contact-section, .product-process-scene, .spec-range, .media-grid, .premium-section { background: var(--vpi-gray-100) !important; color: var(--vpi-black) !important; }
+.page-intro h2, .home-on-demand h2, .home-overview h2, .industry-overview h2, .roles-section h2, .product-process-copy h2, .product-process-step h3, .page-lead, .body-copy, .product-process-intro { color: var(--vpi-blue) !important; }
+.page-intro h2 em, .home-on-demand h2 em, .home-overview h2 em, .product-process-copy h2 em { color: var(--vpi-black) !important; -webkit-text-stroke: 0 !important; }
+.body-copy, .page-lead, .product-process-intro, .product-process-step p { color: var(--vpi-gray-700) !important; }
+
+/* Cards: gray surface on light sections, dark blue on blue sections. */
+.industry-card, .service-panel, .media-card, .management-profile, .management-pillar, .process-step, .premium-card, .product-card, .what-grid article { background: #f7f9fb !important; color: var(--vpi-black) !important; border-color: rgba(11,42,74,.14) !important; }
+.industry-card:hover, .service-panel:hover, .media-card:hover, .management-profile:hover, .management-pillar:hover, .what-grid article:hover { background: #e1e8ee !important; }
+.industry-card h3, .media-card h3, .service-panel h3, .premium-meta h3 { color: var(--vpi-blue) !important; }
+.industry-card p, .media-card p, .service-panel p, .management-profile-copy p { color: var(--vpi-gray-700) !important; }
+[data-theme="dark"] .industry-card, [data-theme="dark"] .service-panel, [data-theme="blue"] .industry-card, [data-theme="blue"] .service-panel { background: #103657 !important; color: var(--vpi-white) !important; border-color: rgba(255,255,255,.17) !important; }
+[data-theme="dark"] .industry-card h3, [data-theme="dark"] .service-panel h3, [data-theme="dark"] .media-card h3, [data-theme="blue"] .industry-card h3, [data-theme="blue"] .service-panel h3 { color: var(--vpi-white) !important; }
+[data-theme="dark"] .industry-card p, [data-theme="dark"] .service-panel p, [data-theme="blue"] .industry-card p, [data-theme="blue"] .service-panel p { color: #dce8f1 !important; }
+
+/* VG-20 product journey: photographic product, not a 3D/exploded reconstruction. */
+.product-process-scene { position: relative; overflow: hidden; background: var(--vpi-gray-100) !important; }
+.product-process-frame { background: #ffffff !important; border: 1px solid rgba(11,42,74,.16) !important; box-shadow: 0 32px 80px rgba(11,42,74,.14) !important; }
+.product-process-frame::before { border-color: rgba(11,42,74,.08) !important; }
+.product-process-frame img { filter: drop-shadow(0 22px 26px rgba(11,42,74,.16)) !important; transform-origin: center center; }
+.product-process-frame-label, .product-process-frame-footer { color: var(--vpi-blue-3) !important; }
+.product-process-step { border-top-color: rgba(11,42,74,.12) !important; }
+.product-process-step.is-active { background: rgba(255,255,255,.38) !important; }
+
+/* Page-specific hero image presentation. */
+.services-page .inner-hero-image img { object-position: 58% center; }
+.career-page .inner-hero-image img { object-position: 52% 42%; }
+.contact-page .inner-hero-image img { object-position: 50% center; }
+
+/* Header, footer and controls. */
+.site-header, .site-header.is-scrolled { background: rgba(232,237,241,.97) !important; border-color: rgba(11,42,74,.15) !important; box-shadow: 0 10px 26px rgba(11,42,74,.09) !important; }
+.nav-link, .nav-dropdown button, .nav-dropdown a { color: var(--vpi-blue) !important; }
+.quote-button { background: var(--vpi-blue) !important; color: #fff !important; }
+.site-footer-vpi { background: var(--vpi-black) !important; color: #eef3f7 !important; border-top-color: rgba(255,255,255,.12) !important; }
+.footer-column, .footer-map-card { background: #0d1722 !important; }
+.footer-kicker { color: #9fb0c0 !important; }
+.footer-column p, .footer-column a { color: #d6e0e8 !important; }
+.footer-map-card iframe, .contact-map-card iframe { filter: grayscale(1) contrast(1.08) brightness(.86) !important; }
+.make-in-india-card { background: #dfe5ea !important; }
+
+@media (max-width: 860px) {
+  .product-process-frame { width: min(94vw, 720px); }
+}

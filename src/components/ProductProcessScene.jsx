@@ -65,12 +65,13 @@ export default function ProductProcessScene() {
 
       // A clean product-inspection movement. The image stays intact; only the presentation tilts as the visitor advances through the five VPI features.
       const keyframes = [
-        { p: 0.00, vars: { rotation: -2, rotationX: 0, rotationY: 0, scale: 1.02, x: 0, y: 0 } },
-        { p: 0.20, vars: { rotation: 2.5, rotationX: 1.2, rotationY: -2.5, scale: 1.035, x: 8, y: -4 } },
-        { p: 0.40, vars: { rotation: -1.8, rotationX: -1.4, rotationY: 3.2, scale: 1.05, x: -6, y: 2 } },
-        { p: 0.60, vars: { rotation: 2.2, rotationX: 1.8, rotationY: -2.2, scale: 1.065, x: 7, y: -3 } },
-        { p: 0.80, vars: { rotation: -2.4, rotationX: -1.1, rotationY: 2.7, scale: 1.08, x: -5, y: 2 } },
-        { p: 1.00, vars: { rotation: 0, rotationX: 0, rotationY: 0, scale: 1.035, x: 0, y: 0 } },
+        { p: 0.00, vars: { rotation: -1.2, rotationX: 0, rotationY: -1, scale: 1.00, x: 0, y: 0 } },
+        { p: 0.18, vars: { rotation: 1.6, rotationX: 1.0, rotationY: -2.2, scale: 1.015, x: 7, y: -3 } },
+        { p: 0.36, vars: { rotation: -2.1, rotationX: -0.8, rotationY: 2.3, scale: 1.025, x: -8, y: 2 } },
+        { p: 0.54, vars: { rotation: 2.3, rotationX: 1.2, rotationY: -2.6, scale: 1.035, x: 8, y: -4 } },
+        { p: 0.72, vars: { rotation: -1.7, rotationX: -1.0, rotationY: 2.5, scale: 1.045, x: -7, y: 2 } },
+        { p: 0.88, vars: { rotation: 1.3, rotationX: 0.6, rotationY: -1.8, scale: 1.05, x: 5, y: -2 } },
+        { p: 1.00, vars: { rotation: 0, rotationX: 0, rotationY: 0, scale: 1.03, x: 0, y: 0 } },
       ];
       keyframes.slice(1).forEach(({ p, vars }) => tl.to(image, { ...vars, ease: "none", duration: 0.2 }, p));
 
@@ -95,7 +96,7 @@ export default function ProductProcessScene() {
   const active = STEPS[step];
 
   return (
-    <section ref={sectionRef} className="product-process-scene" data-theme="white" aria-label="VG-20 CNC Collet Chuck product feature sequence">
+    <section ref={sectionRef} className="product-process-scene" data-theme="gray" aria-label="VG-20 CNC Collet Chuck product feature sequence">
       <div className="product-process-sticky page-pad">
         <div className="product-process-copy">
           <div>
@@ -125,7 +126,7 @@ export default function ProductProcessScene() {
         <div className="product-process-visual">
           <div className="product-process-frame">
             <div className="product-process-frame-label">VPI / PRECISION TOOLING</div>
-            <img ref={imageRef} src="/vpi/vg20-original.jpg" alt="VPI VG-20 CNC Collet Chuck" draggable="false" />
+            <img ref={imageRef} src="/vpi/vg20-original.png" alt="VPI VG-20 CNC Collet Chuck" draggable="false" />
             <div className="product-process-frame-footer"><span>{active.number} / 05</span><span>VG-20 CNC COLLET CHUCK</span></div>
           </div>
         </div>
