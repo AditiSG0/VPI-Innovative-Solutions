@@ -7,11 +7,7 @@ const mapSrc = 'https://www.google.com/maps?q=Ksetra+Tech+Park+Koorgalli+Industr
 export default function Footer() {
   return (
     <footer className="site-footer site-footer-vpi page-pad" data-theme="black" data-testid="site-footer">
-      <div className="footer-vision-panel">
-        <div>
-          <span className="footer-kicker">OUR VISION</span>
-          <p>We empower industries with smart, sustainable, and forward-thinking solutions.<br />By integrating innovation with responsibility, we drive meaningful progress.<br />Our approach combines technology, efficiency, and environmental care.<br />Together, we’re building a better, brighter, and more resilient tomorrow.</p>
-        </div>
+      <div className="footer-brand-panel">
         <Link to="/" className="footer-brand" aria-label="VPI Innovative Solutions home">
           <img src="https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/vpi_logo_transparent_highres.png" alt="VPI Innovative Solutions" className="footer-logo-image" />
           <span>VPI Innovative Solutions</span>

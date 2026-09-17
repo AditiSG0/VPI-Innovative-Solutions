@@ -27,3 +27,9 @@ yarn build
 - The VG-20 CNC Collet Chuck section uses the supplied product image as a scroll-driven rotation/inspection interaction.
 - `/management`, `/management-2`, and `/management-2/` route to a dedicated Management page styled to match the industrial system.
 - The footer includes the VPI logo, VPI vision, address, contact details, sitemap, Make in India graphic and an embedded location map.
+
+## Product interaction
+The VG-20 product section uses the supplied VPI photographs (`public/vpi/vg20-angle-1.jpg` and `public/vpi/vg20-angle-2.jpg`) and a scroll-driven inspection/rotation transition. No exploded-view artwork is used.
+
+## Content and imagery
+The site's VPI copy, contact details, product information, industry information, and page structure are based on the current VPI Innovative Solutions website. The Emergent project supplies the visual presentation, interaction style, and animations.

@@ -645,3 +645,54 @@ a.media-card { color: inherit; text-decoration: none; }
 }
 .product-frame-topline, .product-frame-corner { color: #6f7c82; }
 @media (max-width: 767px) { .collet-assembled-image { inset: 8% 2% 2%; width: 96%; height: 89%; } }
+
+/* Refined VG-20 inspection view: use the supplied product photographs, no cut-out/exploded artwork. */
+.collet-photo-frame {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #e7ebed;
+  border-color: rgba(0,229,255,.16);
+  box-shadow: 0 40px 100px rgba(0,0,0,.58), inset 0 0 0 1px rgba(255,255,255,.65);
+}
+.collet-photo-surface {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(140deg, #f4f6f7 0%, #e6eaec 48%, #cfd6d9 100%);
+}
+.collet-rotation-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 5% 4%;
+  display: block;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  filter: contrast(1.03) saturate(.94) drop-shadow(0 24px 30px rgba(12,20,24,.22));
+}
+.collet-photo-frame .product-frame-topline,
+.collet-photo-frame .product-frame-corner { color: #263238; }
+.collet-photo-frame .product-frame-topline { z-index: 4; }
+.collet-photo-frame .product-frame-corner { z-index: 4; }
+.collet-photo-frame::before { border-color: rgba(7,17,21,.12); z-index: 3; }
+@media (max-width: 767px) {
+  .collet-photo-frame { width: 92vw; height: 52vh; right: 4vw; top: 40%; }
+  .collet-rotation-image { padding: 10% 5%; }
+}
+
+/* Remove the oversized repeated vision treatment from the common footer. */
+.footer-brand-panel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 150px;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.footer-brand-panel .footer-brand {
+  justify-self: start;
+}
