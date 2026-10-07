@@ -284,7 +284,7 @@ export function WhyUsPage() { return <CompanyDetail type="why" />; }
 export function RDPage() { return <CompanyDetail type="rd" />; }
 export function AutomotivePage() { return <IndustryPage data={industryData.automotive} />; }
 export function ElectronicsPage() { return <IndustryPage data={industryData.electronics} />; }
-export function RoboticsPage() { return <RoboticsLanding />; } />; }
+export function RoboticsPage() { return <RoboticsLanding />; }
 export function MedicalPage() { return <IndustryPage data={industryData.medical} />; }
 
 export function ServicesPage() {
