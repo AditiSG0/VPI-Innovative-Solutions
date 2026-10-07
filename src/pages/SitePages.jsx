@@ -65,7 +65,7 @@ const industries = [
 const industryData = {
   automotive: {
     title: "Automobile Industry",
-    hero: "https://in.pinterest.com/pin/473089135859899970/",
+    hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2706.jpg",
     slugTitle: "Automotive Industry",
     image: machineImages[0],
     summary: "At VPI Innovative Solutions, we manufacture high-precision automotive components that meet the industry’s most demanding standards for accuracy, reliability, and performance. From prototypes to large-scale production, our parts support critical systems such as fuel injection, transmission, braking, steering, and sensor assemblies.",
@@ -79,7 +79,7 @@ const industryData = {
   },
   electronics: {
     title: "Electronics Industry",
-    hero: "https://in.pinterest.com/pin/770960029942441388/",
+    hero: "/vpi/industry/electronics.png",
     image: machineImages[1],
     summary: "At VPI Innovative Solutions, we specialize in the manufacture of precision-machined components for the electronics and semiconductor industry, where compactness, accuracy, and surface quality are critical. Our machining systems are optimized for micro-scale components as small as 0.5 mm, ensuring precise dimensional control and consistent quality in every production batch.",
     technical: "Equipped with multi-axis CNC machining, turn-mill centers, and sliding head technology, we produce micro and miniature precision parts with stable dimensional accuracy and burr-free edges.\n\nOur inspection infrastructure, powered by Mitutoyo CMM, profile projectors, and surface roughness measurement systems, ensures full traceability and compliance with electronic component standards.",
@@ -105,7 +105,7 @@ const industryData = {
   },
   medical: {
     title: "Medical Industry",
-    hero: "https://in.pinterest.com/pin/4594305041611213696/",
+    hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2728.jpg",
     image: productImages.comp6,
     summary: "At VPI Innovative Solutions, we manufacture precision components used in medical equipment and critical healthcare devices, where accuracy, reliability, and cleanliness are essential. Our machining processes and inspection controls ensure every part meets stringent biocompatibility and dimensional standards required in the medical domain.",
     technical: "Our infrastructure includes multi-axis CNC machining, turn-mill centers, and sliding head technology, enabling the manufacture of intricate geometries and close-tolerance fits.\n\nEvery process is validated through statistical process control (SPC) and verified using Mitutoyo CMM systems, contour measurement, and surface roughness analysis to maintain full traceability and compliance with customer requirements.",
@@ -118,8 +118,8 @@ const industryData = {
   },
   aerospace: {
     title: "Aerospace Industry",
-    hero: "https://in.pinterest.com/pin/565624034459385684/",
-    image: industryImages.aerospace,
+    hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__16743.jpg",
+    image: "/vpi/industry/aerospace.png",
     summary: "VPI supports aerospace and space applications with precision-engineered, mission-critical components where dimensional accuracy, material performance and repeatability are essential.",
     technical: "Our advanced CNC capabilities support complex aerospace geometries, close tolerances and controlled production. Quality systems and inspection processes are applied throughout manufacturing to maintain consistency and traceability.",
     materials: ["Titanium alloys", "Aerospace-grade stainless steels", "High-strength aluminium alloys", "Nickel-based and other difficult-to-machine alloys"],
@@ -127,7 +127,20 @@ const industryData = {
     finishing: ["Precision grinding and super-finishing", "Controlled deburring and surface preparation", "Heat treatment and specialist surface treatments as required"],
     focusTitle: "Our Focus",
     focus: "Precision, repeatability and process control for demanding aviation and space applications.",
-    gallery: [industryImages.aerospace, machineImages[0], productImages.comp7, productImages.components],
+    gallery: [
+      "/vpi/industry/aerospace.png",
+      "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__16742.jpg",
+      "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__16743.jpg",
+      productImages.comp7
+    ],
+    advancedRd: {
+      title: "Advanced Critical R&D",
+      summary: "At VPI Innovative Solutions, we manufacture precision-engineered components for advanced and specialized applications that demand the highest levels of accuracy, stability, and material performance. These parts are often used in mission-critical, high-stress, and high-temperature environments, where even minor deviations can impact functionality.",
+      technical: "With a combination of multi-axis CNC machining, turn-mill centers, 5-axis Wire EDM, and micro-machining technology, we achieve fine surface finishes and dimensional accuracies within 10 microns on complex geometries. Our process control systems ensure stability, traceability, and repeatability across all machining operations — from prototype validation to production-ready runs.",
+      materials: ["Titanium Alloys: Ti-6Al-4V and other aerospace/medical-grade variants", "Special Stainless Steels: SS316L, SS420, SS440C, 17-4PH, and Duplex grades", "Tool & Die Steels: H13, D2, SKD11", "Case-Hardening Steels: 16MnCr5, 20MnCr5, SCM420", "High-Strength Aluminium Alloys: AL7075, AL6082", "Copper, Brass, and Nickel-Based Alloys"],
+      finishing: ["Heat Treatment, Coating, Grinding, and Super-Finishing", "CMM-based dimensional inspection, surface profiling, and micro-geometry verification", "Process documentation and traceability for prototype and production components"],
+      focus: "Through advanced process engineering, material expertise, and precision validation systems, VPI Innovative Solutions supports R&D, prototype development, and mission-critical industries by delivering components that meet stringent functional, dimensional, and surface finish requirements — ensuring reliability in every one-of-one and specialized part we produce."
+    }
   },
 
 };
@@ -243,6 +256,14 @@ function IndustryPage({ data }) {
           <div><span className="eyebrow cyan">FINISHING</span><h3>{data.finishingTitle}</h3><div className="detail-list">{data.finishing.map(item => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div></div>
         </div>
       </section>
+      {data.advancedRd ? <section className="industry-advanced-rd page-pad" data-theme="black">
+        <div className="section-heading-row"><div><span className="eyebrow cyan">AEROSPACE / ADVANCED CRITICAL R&amp;D</span><h2>{data.advancedRd.title}</h2></div><span className="spec-range-note">MISSION-CRITICAL / HIGH-STRESS / HIGH-TEMPERATURE</span></div>
+        <div className="industry-detail-grid advanced-rd-grid">
+          <div><p className="page-lead">{data.advancedRd.summary}</p><p className="page-lead">{data.advancedRd.technical}</p></div>
+          <div className="industry-advanced-rd-list"><span className="eyebrow cyan">MATERIALS WE MACHINE</span><div className="detail-list">{data.advancedRd.materials.map(item => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div></div>
+        </div>
+        <div className="industry-detail-blocks"><div><span className="eyebrow cyan">POST-MACHINING &amp; VALIDATION</span><div className="detail-list">{data.advancedRd.finishing.map(item => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div></div><div><span className="eyebrow cyan">OUR FOCUS</span><p className="page-lead">{data.advancedRd.focus}</p></div></div>
+      </section> : null}
       <section className="industry-focus page-pad" data-theme="dark">
         <span className="eyebrow cyan">{data.focusTitle}</span>
         <h2>{data.title.replace(/ Industry$/i, "")} <em>without compromise.</em></h2>

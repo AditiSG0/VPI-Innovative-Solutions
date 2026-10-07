@@ -11,7 +11,7 @@ export default function Footer() {
           <p>Precision engineering, CNC machining and manufacturing solutions built for demanding applications.</p>
         </div>
         <Link to="/" className="footer-brand" aria-label="VPI Innovative Solutions home">
-          <img src="https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/vpi_logo_transparent_highres.png" alt="VPI Innovative Solutions" className="footer-logo-image" /><span className="footer-logo-wordmark">VPI Innovative Solutions</span>
+          <img src="https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/vpi_logo_transparent_highres.png" alt="VPI Innovative Solutions" className="footer-logo-image footer-logo-medium" />
         </Link>
       </div>
       <div className="footer-main-grid">
