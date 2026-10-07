@@ -946,3 +946,87 @@ body { background: var(--vpi-white); color: var(--vpi-ink); }
 .industry-home-grid .industry-card-image { height:300px; width:100%; }
 @media (max-width: 1100px) { .industry-home-grid { grid-template-columns:repeat(2, minmax(0,1fr)); } }
 @media (max-width: 700px) { .official-extra-grid { grid-template-columns:1fr; } .industry-home-grid { grid-template-columns:1fr; } .industry-home-grid .industry-card { min-height:0; } }
+
+
+/* VPI UI/UX refresh: light gray + navy + black + VPI gold */
+:root {
+  --ink: #0b1220;
+  --graphite: #1B2A4A;
+  --muted: #5c6675;
+  --cyan: #D4A843;
+  --orange: #D4A843;
+  --line: rgba(27,42,74,.16);
+  --display: 'Barlow Condensed', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+html, body { background: #eef0f3; color: #111827; }
+body { overflow-x: hidden; }
+.site-shell { background: #eef0f3; color: #111827; }
+.site-shell[data-active-theme="steel"] { background: #eef0f3; }
+.site-shell[data-active-theme="black"] { background: #0b1220; color: #fff; }
+.site-shell[data-active-theme="navy"] { background: #1B2A4A; }
+.site-header { background: rgba(255,255,255,.92); border-color: rgba(27,42,74,.16); box-shadow: 0 8px 30px rgba(16,24,40,.08); }
+.site-header.is-scrolled { background: rgba(255,255,255,.96); box-shadow: 0 12px 32px rgba(16,24,40,.12); }
+.nav-link, .nav-dropdown button, .nav-dropdown a { color: #1B2A4A; }
+.nav-link:hover, .nav-dropdown button:hover, .nav-dropdown a:hover { color: #D4A843; }
+.nav-dropdown { background: #fff; border-color: rgba(27,42,74,.16); box-shadow: 0 20px 45px rgba(16,24,40,.15); }
+.dropdown-kicker, .eyebrow.cyan, .cyan, .service-number { color: #9b741f; }
+.quote-button { border-color: #D4A843; background: #D4A843; color: #111827; }
+.quote-button:hover { background: #1B2A4A; color: #fff; border-color: #1B2A4A; box-shadow: 0 10px 30px rgba(27,42,74,.18); }
+.inner-hero { background: #1B2A4A; border-color: rgba(255,255,255,.14); }
+.inner-hero-image img { filter: brightness(.48) contrast(1.08) saturate(.72); }
+.inner-hero-image div { background: linear-gradient(90deg, rgba(8,18,32,.92), rgba(27,42,74,.65) 58%, rgba(27,42,74,.28)), linear-gradient(0deg, #1B2A4A, transparent 60%); }
+.inner-hero-content > p, .inner-hero-content h1 { color: #fff; }
+.page-intro, .home-overview, .industry-overview, .official-extra, .spec-section, .process-section, .media-grid, .product-overview, .home-on-demand, .manifesto, .roles-section { background: #eef0f3; color: #111827; border-color: rgba(27,42,74,.13); }
+.page-intro h2, .home-overview h2, .industry-overview h2, .official-extra h2, .spec-section h2, .page-lead, .body-copy { color: #111827; }
+.page-lead { color: #303b4d; }
+.body-copy { color: #4c5869; }
+.detail-list > div { color: #263246; border-color: rgba(27,42,74,.14); }
+.detail-list svg { color: #D4A843; }
+.industry-overview { padding-top: 6rem; }
+.industry-parallax { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 1rem; }
+.industry-card { min-height: 430px; padding: 0; overflow: hidden; background: #1B2A4A; color: #fff; border: 1px solid rgba(27,42,74,.18); }
+.industry-card:hover { background: #12203a; transform: translateY(-7px); }
+.industry-card-image { height: 220px; overflow: hidden; background: #dfe3e8; }
+.industry-card-image img { width:100%; height:100%; object-fit:cover; filter: saturate(.88) contrast(1.02); transition: transform .7s ease; }
+.industry-card:hover .industry-card-image img { transform: scale(1.06); }
+.industry-card-content { padding: 1.4rem; display:flex; flex-direction:column; min-height:210px; }
+.industry-card h3 { margin: 1.2rem 0 .6rem; color:#fff; font-size:1.75rem; }
+.industry-card p { color: rgba(255,255,255,.76); max-width:none; }
+.industry-card > svg { color:#D4A843; }
+.service-grid { background: #1B2A4A; }
+.service-panel { background: #fff; color: #111827; }
+.service-panel h3 { color: #1B2A4A; }
+.service-panel p { color: #4c5869; }
+.process-step, .media-card { background: #fff; color:#111827; }
+.process-step-copy h3, .media-card h3 { color:#1B2A4A; }
+.process-step-copy p, .media-card p { color:#4c5869; }
+.media-card-image img, .process-step-image img { filter: saturate(.9) contrast(1.04); }
+.metric-strip { background:#1B2A4A; border-color:rgba(255,255,255,.12); }
+.metric-strip strong { color:#fff; }
+.metric-strip span { color:rgba(255,255,255,.68); }
+.manifesto, .home-cta { background:#1B2A4A; color:#fff; }
+.manifesto .page-lead, .home-cta .page-lead { color:rgba(255,255,255,.8); }
+.contact-section { background:#eef0f3; color:#111827; }
+.contact-form-wrap { background:#fff; border-color:rgba(27,42,74,.15); }
+.quote-form input, .quote-form textarea { background:#f7f8fa; color:#111827; border-color:#cbd2dc; }
+.quote-form input::placeholder, .quote-form textarea::placeholder { color:#7b8492; }
+.contact-map-card { background:#fff; border-color:rgba(27,42,74,.15); }
+.site-footer { background:#0b1220 !important; color:#fff; }
+.site-footer a { color:rgba(255,255,255,.78); }
+.footer-vision-panel, .footer-main-grid, .footer-lower, .footer-copyright { border-color:rgba(255,255,255,.13); }
+.footer-note p, .footer-vision-panel p { color:rgba(255,255,255,.68); }
+.footer-kicker { color:#D4A843; }
+.crosshair-line { background:rgba(212,168,67,.32); }
+.crosshair-readout { color:#D4A843; }
+.badge-cross line, .badge-cross circle { stroke:#D4A843; }
+.badge-text { fill:#aab3c0; }
+.facility-section, .premium-section { background:#eef0f3; color:#111827; }
+.facility-panel, .premium-card { background:#fff; color:#111827; }
+.facility-panel-copy p, .premium-meta p { color:#4c5869; }
+.spec-row, .spec-range-table td { color:#4c5869; }
+.spec-row strong, .spec-range-table td.model-cell { color:#1B2A4A; }
+.spec-range-table th { color:#9b741f; background:#f7f8fa; }
+@media (max-width: 1100px) { .industry-parallax { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 860px) { .industry-parallax { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .industry-parallax { grid-template-columns: 1fr; } .industry-card { min-height: 380px; } }

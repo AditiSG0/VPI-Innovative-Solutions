@@ -1,34 +1,27 @@
-# VPI Innovative Solutions
-
-This is the GitHub-ready React/CRACO source for the VPI Innovative Solutions website.
+# VPI Innovative Solutions - GitHub Ready
 
 ## Run locally
-
-Requirements:
-- Node.js 20 LTS recommended
-- Yarn 1.x (the repository includes yarn.lock)
 
 ```bash
 yarn install
 yarn start
 ```
 
-Then open http://localhost:3000
+Open `http://localhost:3000`.
 
-## Production build
-
-```bash
-yarn build
-```
-
-## GitHub + Vercel
-
-Upload the **contents of this folder** to the root of your GitHub repository (not the ZIP as a single file).
-
-Connect the GitHub repository to Vercel. Vercel should detect Create React App/CRACO and use:
+## Vercel
 
 - Install command: `yarn install`
 - Build command: `yarn build`
 - Output directory: `build`
 
-The included `vercel.json` provides SPA routing for React Router pages.
+## Recent UI fixes
+
+- Company dropdown routes for About, Management, CSR, Company Vision, Company History, Why Us and R&D are active.
+- Industries now display the five supplied industry images: Automobile, Electronics, Robotics, Medical and Aerospace.
+- Removed Die & Mould, Energy, Food, Advanced Critical R&D and Telecom from the navigation and active routes.
+- Company Vision content is kept inside the Company section rather than repeated site-wide.
+- Location/address/map are shown only on Contact Us.
+- Services, Career and Contact hero images use the three supplied images.
+- Text contrast has been redesigned around VPI gold `#D4A843`, navy `#1B2A4A`, white and light gray.
+- Smooth scrolling, cursor coordinates and scroll interactions remain enabled.
