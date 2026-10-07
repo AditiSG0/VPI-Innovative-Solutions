@@ -1243,3 +1243,202 @@ html, body, #root, .site-shell {
   .logo-wordmark { font-size:11px; }
   .industry-gallery { grid-template-columns:1fr; }
 }
+
+/* VPI / premium industrial preloader */
+.vpi-preloader{position:fixed;inset:0;z-index:99999;background:#121212;color:#fff;overflow:hidden;display:flex;align-items:stretch;justify-content:stretch}
+.vpi-preloader-grid{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,transparent,#000 25%,#000 75%,transparent)}
+.vpi-preloader-image{position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(18,18,18,.98) 0%,rgba(18,18,18,.88) 38%,rgba(18,18,18,.36) 72%,rgba(18,18,18,.78) 100%),url('https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/Miyano-machine.png');background-size:cover;background-position:center;filter:contrast(1.05) saturate(.65)}
+.vpi-preloader-content{position:relative;z-index:3;width:100%;min-height:100%;padding:28px 34px 30px;display:flex;flex-direction:column;justify-content:space-between}
+.vpi-preloader-top,.vpi-preloader-meta,.vpi-preloader-bottom{display:flex;align-items:center;gap:20px;font:500 10px/1 'Roboto Mono',monospace;letter-spacing:.18em;text-transform:uppercase}
+.vpi-preloader-top span:first-child{font:600 24px/1 'Montserrat',sans-serif;letter-spacing:-.08em}.vpi-preloader-top span:last-child{opacity:.58}
+.vpi-preloader-centre{margin:auto 0;max-width:760px}.vpi-preloader-title{font:500 clamp(58px,10vw,150px)/.82 'Montserrat',sans-serif;letter-spacing:-.07em}.vpi-preloader-title em{font-style:normal;color:#4050e3;-webkit-text-stroke:1px #fff}.vpi-preloader-meta{margin-top:28px;justify-content:space-between;max-width:560px;color:rgba(255,255,255,.55)}
+.vpi-preloader-bottom{width:min(620px,70vw);color:rgba(255,255,255,.58)}.vpi-preloader-line{height:1px;background:rgba(255,255,255,.2);flex:1;overflow:hidden}.vpi-preloader-line i{display:block;height:100%;background:#fff;transform-origin:left center}.vpi-preloader-bottom strong{color:#fff;font-weight:500;min-width:28px;text-align:right}
+.vpi-preloader-curtain{position:absolute;z-index:5;inset:0 auto 0 0;width:100%;background:#4050e3;transform-origin:right center;pointer-events:none}.vpi-preloader-curtain.curtain-b{background:#fff;z-index:4;mix-blend-mode:normal}
+@media(max-width:700px){.vpi-preloader-content{padding:20px}.vpi-preloader-top span:last-child{display:none}.vpi-preloader-title{font-size:18vw}.vpi-preloader-bottom{width:100%;gap:12px}.vpi-preloader-bottom span{font-size:8px}.vpi-preloader-image{background-position:60% center}}
+
+/* Engineering image direction */
+.vpi-company-gallery .vpi-motion-image img,.vpi-company-hero .vpi-motion-image img{filter:saturate(.78) contrast(1.08)}
+
+/* FINAL CONTRAST + TIMELINE + MAP FIXES */
+/* Any dark surface must always use white foreground text. */
+.premium-section[data-theme="black"],
+.premium-section[data-theme="dark"],
+.premium-section[data-theme="navy"],
+[data-theme="black"], [data-theme="dark"], [data-theme="navy"] {
+  color: #fff !important;
+}
+.premium-section[data-theme="black"] h1,
+.premium-section[data-theme="black"] h2,
+.premium-section[data-theme="black"] h3,
+.premium-section[data-theme="black"] p,
+.premium-section[data-theme="black"] span,
+.premium-section[data-theme="dark"] h1,
+.premium-section[data-theme="dark"] h2,
+.premium-section[data-theme="dark"] h3,
+.premium-section[data-theme="dark"] p,
+.premium-section[data-theme="dark"] span,
+.premium-section[data-theme="navy"] h1,
+.premium-section[data-theme="navy"] h2,
+.premium-section[data-theme="navy"] h3,
+.premium-section[data-theme="navy"] p,
+.premium-section[data-theme="navy"] span {
+  color: #fff !important;
+}
+.premium-section .premium-meta h3,
+.premium-section .premium-meta p,
+.premium-section .premium-meta .service-number { color:#fff !important; }
+.premium-section .premium-meta p { opacity:.82; }
+
+/* Timeline: edge-to-edge composition with a strong, aligned central spine. */
+.vpi-timeline { width:100%; overflow:hidden; }
+.vpi-timeline-intro,
+.vpi-timeline-body,
+.vpi-timeline-end { width:100%; max-width:none !important; margin:0 !important; padding-left:clamp(24px,4vw,72px) !important; padding-right:clamp(24px,4vw,72px) !important; }
+.vpi-timeline-intro { grid-template-columns:minmax(0,1.5fr) minmax(320px,.7fr) !important; gap:clamp(3rem,7vw,10rem) !important; }
+.vpi-timeline-intro h2 { font-size:clamp(4rem,9.5vw,10rem) !important; max-width:1100px; }
+.vpi-timeline-intro .page-lead { max-width:560px !important; justify-self:end; }
+.vpi-timeline-body { padding-top:6rem !important; }
+.vpi-timeline-list { width:100% !important; gap:1px !important; }
+.vpi-timeline-item { grid-template-columns:clamp(5rem,8vw,9rem) minmax(120px,.28fr) minmax(0,1fr) !important; gap:clamp(1rem,2vw,2.5rem) !important; min-height:210px !important; width:100% !important; }
+.vpi-timeline-card { width:100%; min-height:190px; padding:clamp(1.5rem,3vw,3rem) !important; display:flex; flex-direction:column; justify-content:center; }
+.vpi-timeline-card h3 { font-size:clamp(2rem,3.8vw,4.2rem) !important; line-height:.95 !important; }
+.vpi-timeline-card p { max-width:100% !important; font-size:clamp(.9rem,1.15vw,1.05rem) !important; }
+.vpi-timeline-line { left:clamp(24px,4vw,72px) !important; }
+.vpi-timeline-marker { justify-content:center !important; }
+
+@media(max-width:860px){
+  .vpi-timeline-intro { grid-template-columns:1fr !important; gap:1.5rem !important; }
+  .vpi-timeline-intro .page-lead { justify-self:start; max-width:680px !important; }
+  .vpi-timeline-intro h2 { font-size:clamp(3.5rem,15vw,7rem) !important; }
+  .vpi-timeline-body { padding-left:24px !important; padding-right:24px !important; }
+  .vpi-timeline-line { left:40px !important; }
+  .vpi-timeline-item { grid-template-columns:3rem minmax(0,1fr) !important; min-height:auto !important; padding:0 0 1.5rem !important; }
+  .vpi-timeline-year { grid-column:2 !important; order:-1 !important; }
+  .vpi-timeline-marker { grid-row:1 / span 2 !important; }
+  .vpi-timeline-card { grid-column:2 !important; min-height:170px; }
+}
+
+/* FINAL TYPOGRAPHY SPACING PASS
+   Keep large display type airy and intentional. Prevent headings, words and sections
+   from feeling compressed while preserving the premium editorial character. */
+:root{
+  --vpi-section-y: clamp(88px, 11vw, 170px);
+  --vpi-copy-gap: clamp(20px, 2.2vw, 34px);
+}
+
+/* Global heading rhythm */
+h1,h2,h3,h4,h5,h6{
+  word-spacing: .035em;
+  line-height: 1.02;
+}
+
+/* Large display headings need breathing room between lines and surrounding copy */
+.hero h1,
+.inner-hero-content h1,
+.vpi-company-hero-copy h1,
+.company-overview-card h3,
+.company-mission h2,
+.industry-detail-grid h2,
+.industry-focus h2,
+.vpi-timeline-intro h2,
+.vpi-timeline-card h3,
+.premium-section h1,
+.premium-section h2{
+  line-height: 1.02 !important;
+  word-spacing: .045em !important;
+  margin-top: .45em !important;
+  margin-bottom: .55em !important;
+}
+
+/* Don't let section labels and paragraphs crowd the heading above them */
+.section-kicker,
+.eyebrow,
+.vpi-company-eyebrow,
+.vpi-company-hero-copy span,
+.vpi-preloader-meta,
+.vpi-preloader-top,
+.vpi-preloader-bottom{
+  letter-spacing: .16em;
+  word-spacing: .08em;
+}
+
+.vpi-company-section,
+.industry-detail-content,
+.industry-focus,
+.premium-section,
+.page-intro,
+.home-overview,
+.official-extra,
+.spec-section,
+.process-section,
+.media-grid,
+.product-overview,
+.home-on-demand,
+.roles-section,
+.contact-section{
+  padding-top: var(--vpi-section-y) !important;
+  padding-bottom: var(--vpi-section-y) !important;
+}
+
+.vpi-company-section h2,
+.vpi-company-section h3,
+.vpi-company-section p,
+.industry-detail-grid h2,
+.industry-detail-grid p,
+.industry-focus h2,
+.industry-focus p,
+.premium-section h2,
+.premium-section p{
+  margin-bottom: var(--vpi-copy-gap);
+}
+
+.vpi-company-section p,
+.industry-detail-grid p,
+.industry-focus p,
+.premium-section p,
+.page-lead,
+.body-copy{
+  line-height: 1.78 !important;
+  word-spacing: .02em;
+}
+
+/* Timeline spacing: readable year -> marker -> card hierarchy */
+.vpi-timeline-intro{padding-top:clamp(18px,2vw,32px) !important;padding-bottom:clamp(32px,4vw,60px) !important;}
+.vpi-timeline-intro h2{line-height:1 !important;word-spacing:.055em !important;}
+.vpi-timeline-item{padding-top:clamp(14px,1.5vw,24px) !important;padding-bottom:clamp(14px,1.5vw,24px) !important;}
+.vpi-timeline-year{line-height:1.5 !important;word-spacing:.08em !important;}
+.vpi-timeline-card h3{line-height:1.02 !important;word-spacing:.05em !important;margin-bottom:clamp(16px,2vw,24px) !important;}
+.vpi-timeline-card p{line-height:1.8 !important;}
+
+/* Navigation and wordmark should never feel cramped */
+.navbar-brand,
+.nav-brand,
+.brand-text{
+  letter-spacing: .015em !important;
+  word-spacing: .08em !important;
+}
+
+@media (max-width:767px){
+  h1,h2,h3,h4,h5,h6{line-height:1.06;word-spacing:.025em;}
+  .vpi-company-section,
+  .industry-detail-content,
+  .industry-focus,
+  .premium-section,
+  .page-intro,
+  .home-overview,
+  .official-extra,
+  .spec-section,
+  .process-section,
+  .media-grid,
+  .product-overview,
+  .home-on-demand,
+  .roles-section,
+  .contact-section{
+    padding-top:72px !important;
+    padding-bottom:72px !important;
+  }
+  .vpi-company-hero-copy h1{line-height:1.02 !important;}
+  .vpi-timeline-intro{padding-top:10px !important;padding-bottom:28px !important;}
+  .vpi-timeline-card{padding:24px !important;}
+  .vpi-timeline-card h3{line-height:1.06 !important;}
+}

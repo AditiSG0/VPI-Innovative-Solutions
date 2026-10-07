@@ -7,6 +7,7 @@ import Crosshair from "@/components/Crosshair";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
+import Preloader from "@/components/Preloader";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +19,7 @@ export default function SiteLayout() {
   }, [location.pathname]);
 
   return <>
+    <Preloader />
     <Crosshair />
     <Navbar />
     <PageTransition key={location.pathname}>

@@ -4,21 +4,21 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 
 const EASE=[0.16,1,0.3,1];
-const ABOUT_BG='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/About-us-BG-1.png';
-const ABOUT_IMG_1='https://vpiinnovativesolutions.com/wp-content/uploads/2025/05/100_3405-500x500-1.jpg';
-const ABOUT_IMG_2='https://vpiinnovativesolutions.com/wp-content/uploads/2025/05/100_3392-500x500-1.jpg';
-const ABOUT_IMG_3='https://vpiinnovativesolutions.com/wp-content/uploads/2025/05/shanghai-3-500x500-1.jpg';
-const ABOUT_IMG_4='https://images.unsplash.com/photo-1557804506-669a67965ba0';
-const ABOUT_IMG_5='https://vpiinnovativesolutions.com/wp-content/uploads/2025/05/close-up-people-sitting-planning-scaled.jpg';
-const ABOUT_IMG_6='https://vpiinnovativesolutions.com/wp-content/uploads/2025/05/engineers-working-together-solar-panels-plant-assembly-lines-configuration-scaled.jpg';
-const ABOUT_IMG_7='https://images.unsplash.com/photo-1519389950473-47ba0277781c';
+const ABOUT_BG='/vpi/industry/electronics.png';
+const ABOUT_IMG_1='/vpi/industry/automotive.png';
+const ABOUT_IMG_2='/vpi/industry/robotics.png';
+const ABOUT_IMG_3='/vpi/industry/aerospace.png';
+const ABOUT_IMG_4='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/Miyano-machine.png';
+const ABOUT_IMG_5='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/banner-mill-e-700.jpg';
+const ABOUT_IMG_6='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/mac-2.png';
+const ABOUT_IMG_7='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/compo3.jpg';
 const MACHINES='https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&ixlib=rb-1.2.1&q=80&w=1350';
-const MGMT_HERO='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/pexels-olly-3760089.jpg';
+const MGMT_HERO='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/mac-2.png';
 const CEO='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/Mr-Gowrishankar-Sanjay-CEO.jpg';
 const CEO_ALT='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/Mr-Gowrishankar-Sanjay-CEO.png';
 const DINESH='https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/Mr.-TV-Dinesh-Kumar-Senior-Manager.png';
-const VISION_IMG='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/business-strategy-success-target-goals-scaled.jpg';
-const HISTORY_IMG='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/photorealistic-law-environment.png';
+const VISION_IMG='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/banner-mill-e-700.jpg';
+const HISTORY_IMG='https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/Miyano-machine.png';
 
 function MotionImage({src,alt,className=''}){
   const ref=useRef(null); const {scrollYProgress}=useScroll({target:ref,offset:['start end','end start']});
