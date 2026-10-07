@@ -1,25 +1,34 @@
 # VPI Innovative Solutions
 
-VPI website based on the VPI source-site content and structure, with the requested interactive additions.
+This is the GitHub-ready React/CRACO source for the VPI Innovative Solutions website.
 
-## Theme
-The site uses a restrained **white / dark-blue / gray** visual palette throughout the navigation, sections, cards, forms, footer, overlays, and interactive accents.
+## Run locally
 
-## Interactive additions
-- Mouse coordinate cursor effect
-- Smooth scrolling
-- Scroll-linked homepage motion
-- Scroll-controlled VG-20 3D rotation
-- Responsive layouts
-- VPI industry imagery supplied for the homepage
+Requirements:
+- Node.js 20 LTS recommended
+- Yarn 1.x (the repository includes yarn.lock)
 
-## Run
 ```bash
 yarn install
 yarn start
 ```
 
+Then open http://localhost:3000
+
 ## Production build
+
 ```bash
 yarn build
 ```
+
+## GitHub + Vercel
+
+Upload the **contents of this folder** to the root of your GitHub repository (not the ZIP as a single file).
+
+Connect the GitHub repository to Vercel. Vercel should detect Create React App/CRACO and use:
+
+- Install command: `yarn install`
+- Build command: `yarn build`
+- Output directory: `build`
+
+The included `vercel.json` provides SPA routing for React Router pages.
