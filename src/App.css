@@ -1442,3 +1442,35 @@ h1,h2,h3,h4,h5,h6{
   .vpi-timeline-card{padding:24px !important;}
   .vpi-timeline-card h3{line-height:1.06 !important;}
 }
+
+
+/* FINAL COMPANY / MANAGEMENT VISUAL PASS */
+.footer-brand { grid-template-columns:auto 1fr; justify-content:center; align-items:center; gap:16px; padding:22px 28px; min-height:120px; }
+.footer-logo-image { width:72px !important; max-width:72px !important; height:72px !important; object-fit:contain; }
+.footer-logo-wordmark { color:#121212; font-family:Inter,system-ui,sans-serif; font-size:clamp(16px,1.5vw,22px); font-weight:600; letter-spacing:-.02em; line-height:1.15; }
+.site-footer .footer-brand { color:#121212; }
+.vpi-company-detail { background:#121212 !important; color:#fff !important; }
+.vpi-company-section { color:#17191d; }
+.vpi-company-section p, .vpi-company-section li, .vpi-company-section span { color:inherit; }
+.vpi-company-dark p, .vpi-company-dark .vpi-company-list span { color:#f4f6f8 !important; }
+.vpi-company-dark h2, .vpi-company-dark h3, .vpi-company-dark .vpi-company-eyebrow { color:#fff !important; }
+.vpi-company-hero-copy h1, .vpi-company-hero-copy p, .vpi-company-hero-copy span { color:#fff !important; text-shadow:0 2px 18px rgba(0,0,0,.4); }
+.vpi-company-hero .vpi-motion-image img { filter:saturate(.92) brightness(.86) contrast(1.04) !important; }
+.vpi-company-gallery .vpi-motion-image img, .vpi-company-split .vpi-motion-image img, .vpi-leader .vpi-motion-image img { filter:saturate(.92) brightness(.96) contrast(1.03) !important; }
+.vpi-percent-grid { display:grid; grid-template-columns:repeat(2,minmax(180px,260px)); gap:48px; margin-top:64px; padding-top:44px; border-top:1px solid rgba(255,255,255,.14); }
+.vpi-percent { display:flex; flex-direction:column; align-items:flex-start; gap:9px; }
+.vpi-percent-ring { width:150px; height:150px; position:relative; display:grid; place-items:center; border-radius:50%; }
+.vpi-percent-fill { position:absolute; inset:0; border-radius:50%; mask:radial-gradient(farthest-side,transparent calc(100% - 8px),#000 calc(100% - 7px)); -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 8px),#000 calc(100% - 7px)); }
+.vpi-percent-core { position:relative; width:126px; height:126px; border-radius:50%; display:grid; place-items:center; background:#121212; border:1px solid rgba(255,255,255,.1); }
+.vpi-percent-core strong { color:#fff; font-size:31px; font-weight:500; }
+.vpi-percent b { color:#fff; font-size:17px; font-weight:500; }
+.vpi-percent span { color:#aeb8c0; font-size:13px; line-height:1.5; max-width:230px; }
+@media(max-width:767px){
+ .footer-brand { grid-template-columns:1fr; text-align:center; gap:10px; padding:24px 18px; }
+ .footer-logo-image { width:64px !important; max-width:64px !important; height:64px !important; margin:auto; }
+ .vpi-company-hero { min-height:78vh; }
+ .vpi-company-hero-copy h1 { font-size:clamp(46px,14vw,76px); line-height:.94; }
+ .vpi-percent-grid { grid-template-columns:1fr 1fr; gap:24px; }
+ .vpi-percent-ring { width:118px; height:118px; }
+ .vpi-percent-core { width:98px; height:98px; }
+}
