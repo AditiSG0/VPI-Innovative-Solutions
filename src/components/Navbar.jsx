@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/motion";
 
-const companyLinks = [["About us", "/about"], ["Management", "/management"], ["CSR", "/csr"], ["Company vision", "/vision"], ["Company history", "/history"], ["Why us", "/why-us"], ["R&D", "/rd"]];
+const companyLinks = [["Company overview", "/company"], ["About us", "/about"], ["Management", "/management"], ["CSR", "/csr"], ["Company vision", "/vision"], ["Company history", "/history"], ["Why us", "/why-us"], ["R&D", "/rd"]];
 const industryLinks = [["Automobile", "/industries/automotive"], ["Electronics", "/industries/electronics"], ["Robotics", "/industries/robotics"], ["Medical", "/industries/medical"], ["Aerospace", "/aerospace-industry"]];
 
 function Dropdown({ label, links, menuKey, openMenu, setOpenMenu }) {

@@ -25,3 +25,12 @@ Open `http://localhost:3000`.
 - Services, Career and Contact hero images use the three supplied images.
 - Text contrast has been redesigned around VPI gold `#D4A843`, navy `#1B2A4A`, white and light gray.
 - Smooth scrolling, cursor coordinates and scroll interactions remain enabled.
+
+
+## Latest VPI UI/UX update
+- Company overview is now a fully populated page at `/company`, with links to About Us, Management, CSR, Company Vision, Company History, Why Us and R&D.
+- Industries is limited to Automobile, Electronics, Robotics, Medical and Aerospace and uses the supplied industry images.
+- Contact location is set to: 13 P A, KIADB 1ST MAIN ROAD, INDUSTRIAL AREA, Koorgally, Mysuru, Karnataka 571130, India, including the embedded Google Maps query.
+- Career hero now reads “Build the next cut” with “Join Our Team” as the supporting line.
+- Products hero now reads “VPI’s Premium line.”
+- Final theme: #4050e3, #121212, #e9eaf0, with white highlights and high-contrast text.

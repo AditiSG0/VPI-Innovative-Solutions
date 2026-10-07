@@ -1030,3 +1030,79 @@ body { overflow-x: hidden; }
 @media (max-width: 1100px) { .industry-parallax { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 @media (max-width: 860px) { .industry-parallax { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 560px) { .industry-parallax { grid-template-columns: 1fr; } .industry-card { min-height: 380px; } }
+
+/* FINAL VPI BRAND SYSTEM: electric blue + black + light gray + white highlights */
+:root {
+  --vpi-blue: #4050e3;
+  --vpi-black: #121212;
+  --vpi-light: #e9eaf0;
+  --vpi-white: #ffffff;
+  --vpi-ink: #121212;
+  --vpi-navy: #121212;
+  --vpi-gold: #4050e3;
+  --cyan: #4050e3;
+  --orange: #4050e3;
+  --line: rgba(18,18,18,.14);
+}
+html, body, #root, .site-shell { background: var(--vpi-light); color: var(--vpi-ink); }
+body { color: var(--vpi-ink); }
+.site-header { background: rgba(233,234,240,.96) !important; border-color: rgba(18,18,18,.12) !important; color: var(--vpi-black); }
+.site-header.is-scrolled { background: rgba(233,234,240,.99) !important; }
+.logo-img { filter: none; }
+.nav-link, .nav-dropdown button, .nav-dropdown a { color: var(--vpi-black) !important; }
+.nav-link:hover, .nav-dropdown button:hover, .nav-dropdown a:hover { color: var(--vpi-blue) !important; }
+.nav-dropdown { background: var(--vpi-light) !important; border-color: rgba(18,18,18,.14) !important; }
+.nav-dropdown a:hover { background: rgba(64,80,227,.08) !important; }
+.quote-button { background: var(--vpi-blue) !important; border-color: var(--vpi-blue) !important; color: #fff !important; }
+.quote-button:hover { background: var(--vpi-black) !important; border-color: var(--vpi-black) !important; color: #fff !important; }
+.inner-hero { background: var(--vpi-black) !important; }
+.inner-hero-content h1, .inner-hero-content > p { color: #fff !important; }
+.inner-hero-content h1 em { color: #fff !important; -webkit-text-stroke: 0 !important; }
+.inner-hero-image img { filter: brightness(.48) contrast(1.08) saturate(.7) !important; }
+.inner-hero-image div { background: linear-gradient(90deg, rgba(18,18,18,.96), rgba(18,18,18,.58) 62%, rgba(18,18,18,.25)) !important; }
+.page-intro, .home-overview, .official-extra, .spec-section, .process-section, .media-grid, .product-overview, .home-on-demand, .manifesto, .roles-section, .contact-section, .company-mission { background: var(--vpi-light) !important; color: var(--vpi-black) !important; }
+.page-intro h2, .home-overview h2, .official-extra h2, .spec-section h2, .page-lead, .body-copy { color: var(--vpi-black) !important; }
+.page-intro h2 em, .home-overview h2 em, .company-mission h2 em { color: var(--vpi-blue) !important; -webkit-text-stroke: 0 !important; }
+.page-lead, .body-copy, .official-extra p { color: #30313a !important; }
+.eyebrow, .eyebrow.cyan, .cyan, .service-number { color: var(--vpi-blue) !important; }
+.detail-list > div { color: var(--vpi-black) !important; border-color: rgba(18,18,18,.13); }
+.detail-list svg { color: var(--vpi-blue) !important; }
+.industry-overview, .company-overview-grid { background: var(--vpi-black) !important; color: #fff !important; }
+.industry-overview h2, .company-overview-grid h2, .industry-overview .section-heading-row h2 { color: #fff !important; }
+.industry-overview h2 em { color: #fff !important; }
+.industry-parallax, .industry-home-grid { display: grid; }
+.industry-card, .company-overview-card { background: #1b1b1b !important; color: #fff !important; border-color: rgba(255,255,255,.14) !important; }
+.industry-card:hover, .company-overview-card:hover { background: #202020 !important; border-color: rgba(64,80,227,.75) !important; }
+.industry-card h3, .industry-card p, .company-overview-card h3, .company-overview-card p { color: #fff !important; }
+.industry-card p, .company-overview-card p { color: rgba(255,255,255,.78) !important; }
+.industry-card > svg, .company-overview-card .text-link { color: #fff !important; }
+.industry-card-image { background: #e9eaf0 !important; }
+.industry-card-image img { object-fit: cover !important; }
+.service-grid, .metric-strip, .manifesto, .home-cta { background: var(--vpi-black) !important; }
+.service-panel, .process-step, .media-card, .facility-panel, .premium-card, .contact-form-wrap, .contact-map-card { background: #fff !important; color: var(--vpi-black) !important; border-color: rgba(18,18,18,.12) !important; }
+.service-panel h3, .process-step-copy h3, .media-card h3 { color: var(--vpi-black) !important; }
+.service-panel p, .process-step-copy p, .media-card p { color: #4a4b54 !important; }
+.manifesto .page-lead, .home-cta .page-lead { color: rgba(255,255,255,.82) !important; }
+.contact-map-card iframe { filter: none !important; }
+.company-overview-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; }
+.company-overview-card { min-height:340px; padding:2rem; display:flex; flex-direction:column; text-decoration:none; border:1px solid rgba(255,255,255,.12); transition:transform .35s ease, border-color .35s ease, background .35s ease; }
+.company-overview-card:hover { transform:translateY(-6px); }
+.company-overview-card h3 { margin:2.8rem 0 .8rem; font-size:clamp(1.8rem,2.6vw,3rem); line-height:.95; }
+.company-overview-card p { margin:0 0 1.5rem; line-height:1.7; }
+.company-overview-card .text-link { margin-top:auto; display:inline-flex; align-items:center; gap:.4rem; font:600 .7rem var(--mono); letter-spacing:.1em; }
+.company-mission { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,7vw,8rem); align-items:end; padding-top:8rem; padding-bottom:8rem; }
+.company-mission h2 { margin:.8rem 0 0; font-size:clamp(3rem,6vw,6.5rem); line-height:.86; color:var(--vpi-black); }
+.site-footer { background:var(--vpi-black) !important; color:#fff !important; }
+.site-footer a, .site-footer p, .footer-copyright { color:rgba(255,255,255,.82) !important; }
+.footer-kicker { color:var(--vpi-blue) !important; }
+.footer-socials a { background:var(--vpi-blue) !important; color:#fff !important; border-color:var(--vpi-blue) !important; }
+.crosshair-line { background:rgba(64,80,227,.45) !important; }
+.crosshair-readout { color:var(--vpi-blue) !important; }
+.badge-cross line, .badge-cross circle { stroke:var(--vpi-blue) !important; }
+
+@media (max-width: 1100px) {
+  .company-overview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 700px) {
+  .company-overview-grid, .company-mission { grid-template-columns:1fr; }
+}
