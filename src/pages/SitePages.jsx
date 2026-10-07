@@ -127,7 +127,15 @@ const vgRows = [
 ];
 
 function PageHero({ number, eyebrow, title, accent, lead, image = factoryImage }) {
-  return <section className="inner-hero" data-theme="dark" data-testid="page-hero"><div className="inner-hero-image"><motion.img src={image} alt="VPI Innovative Solutions" initial={{ scale: 1.14 }} animate={{ scale: 1 }} transition={{ duration: 1.6, ease: EASE }} /><div /></div><div className="page-pad inner-hero-content"><motion.span className="eyebrow cyan" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: EASE }}>{eyebrow} / {number}</motion.span><h1><MaskedLine delay={0.2}>{title}</MaskedLine>{accent ? <MaskedLine delay={0.32}><em>{accent}</em></MaskedLine> : null}</h1>{lead ? <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5, ease: EASE }}>{lead}</motion.p> : null}</div><span className="inner-hero-scroll"><ArrowDown size={14} /> SCROLL TO EXPLORE</span></section>;
+  return <section className="inner-hero" data-theme="dark" data-testid="page-hero">
+    <div className="inner-hero-image">{image ? <img src={image} alt="VPI Innovative Solutions" onError={(e) => { e.currentTarget.style.display = "none"; }} /> : null}<div /></div>
+    <div className="page-pad inner-hero-content">
+      <span className="eyebrow cyan">{eyebrow} / {number}</span>
+      <h1>{title}{accent ? <><br /><em>{accent}</em></> : null}</h1>
+      {lead ? <p>{lead}</p> : null}
+    </div>
+    <span className="inner-hero-scroll"><ArrowDown size={14} /> SCROLL TO EXPLORE</span>
+  </section>;
 }
 
 function LinkButton({ to, children, testId }) {
@@ -177,20 +185,7 @@ function OfficialPage({ eyebrow, title, accent, lead, kicker, image, paragraphs 
           {bullets.length ? <div className="detail-list">{bullets.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div> : null}
         </div>
       </PageIntro>
-      {(extraTitle || extraParagraphs.length || extraBullets.length || extraImage) ? (
-        <section className="official-extra page-pad" data-theme="steel">
-          <div className="official-extra-grid">
-            <div>
-              <span className="eyebrow cyan">VPI / {extraTitle || "DETAILS"}</span>
-              {extraTitle ? <h2>{extraTitle}</h2> : null}
-              {extraParagraphs.map((paragraph) => <p className="page-lead" key={paragraph}>{paragraph}</p>)}
-              {extraBullets.length ? <div className="detail-list">{extraBullets.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div> : null}
-            </div>
-            {extraImage ? <div className="official-extra-image"><img src={extraImage} alt={extraTitle || "VPI"} /></div> : null}
-          </div>
-        </section>
-      ) : null}
-      <VpiVisionFooter />
+      {(extraTitle || extraParagraphs.length || extraBullets.length || extraImage) ? <section className="official-extra page-pad" data-theme="steel"><div className="official-extra-grid"><div><span className="eyebrow cyan">VPI / {extraTitle || "DETAILS"}</span>{extraTitle ? <h2>{extraTitle}</h2> : null}{extraParagraphs.map((paragraph) => <p className="page-lead" key={paragraph}>{paragraph}</p>)}{extraBullets.length ? <div className="detail-list">{extraBullets.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div> : null}</div>{extraImage ? <div className="official-extra-image"><img src={extraImage} alt={extraTitle || "VPI"} /></div> : null}</div></section> : null}
     </div>
   );
 }
@@ -200,7 +195,18 @@ export function AerospacePage() {
 }
 
 export function IndustriesPage() {
-  return <div><PageHero number="01" eyebrow="INDUSTRIES" title="Strength You Can Shape." accent="Industries We Empower" lead="Precision Engineering Reimagined | VPI Innovative Solutions" image={productImages.components} /><PageIntro kicker="Precision Engineering for Tomorrow's Challenges" title={<>Precision Engineering<br /><em>for Tomorrow’s Challenges</em></>}><p className="page-lead">At VPI Innovative Solutions, we don't just manufacture components — we engineer possibilities. Our cutting-edge machining, tooling, and design expertise power industries where precision isn't just important, it's mission-critical.</p></PageIntro><section className="industry-overview page-pad" data-theme="dark"><div className="industry-parallax">{industries.map(([name,path,copy,image], i) => <Link to={path} className="industry-card" key={path} onMouseMove={spotlightMove}><div className="industry-card-image"><img src={image} alt={name} loading="lazy" /></div><div className="industry-card-content"><span className="service-number">0{i+1}</span><h3>{name}</h3><p>{copy}</p><ArrowUpRight size={17}/></div></Link>)}</div></section><section className="page-pad" data-theme="steel"><span className="eyebrow cyan">VPI's Industrial Solutions</span><p className="page-lead">At VPI, we redefine industrial excellence by offering tailored solutions that meet the unique demands of diverse sectors, from custom metalwork to precision CNC machining. Our commitment to quality ensures that every part we produce embodies the strength and reliability that industries rely on, empowering businesses to innovate without compromise. With a focus on customer satisfaction and competitive pricing, we stand ready to partner with you to turn your visions into reality, providing dependable support every step of the way. Unlock the potential of your projects with VPI’s industrial solutions, where craftsmanship meets cutting-edge technology.</p><LinkButton to="/services">OUR SERVICES</LinkButton></section><VpiVisionFooter /></div>;
+  return <div className="industries-page">
+    <PageHero number="01" eyebrow="INDUSTRIES" title="Strength You Can Shape." accent="Industries We Empower" lead="Precision Engineering Reimagined | VPI Innovative Solutions" image="/vpi/industry/automotive.png" />
+    <PageIntro kicker="Precision Engineering for Tomorrow's Challenges" title={<>Precision Engineering<br /><em>for Tomorrow’s Challenges</em></>}>
+      <p className="page-lead">At VPI Innovative Solutions, we don't just manufacture components. We engineer possibilities. Our machining, tooling, and design expertise support industries where precision is mission-critical.</p>
+    </PageIntro>
+    <section className="industry-overview page-pad" data-theme="dark">
+      <div className="industry-parallax">
+        {industries.map(([name,path,copy,image], i) => <Link to={path} className="industry-card" key={path}><div className="industry-card-image"><img src={image} alt={name} /></div><div className="industry-card-content"><span className="service-number">0{i+1}</span><h3>{name}</h3><p>{copy}</p><ArrowUpRight size={17}/></div></Link>)}
+      </div>
+    </section>
+    <section className="page-pad industrial-solutions-section" data-theme="steel"><span className="eyebrow cyan">VPI's Industrial Solutions</span><h2>Precision manufacturing for <em>real industries.</em></h2><p className="page-lead">VPI provides tailored CNC machining, custom metalwork, precision tooling and component manufacturing, with quality and reliability built into every stage.</p><LinkButton to="/services">OUR SERVICES</LinkButton></section>
+  </div>;
 }
 
 function SimpleIndustryPage({ title, copy }) {
@@ -245,17 +251,19 @@ export function CompanyPage() {
   const companyCards = [
     ["01", "About Us", "Since 2005, VPI Innovative Solutions has built its reputation around precision engineering, CNC machining, custom tooling and reliable component manufacturing.", "/about"],
     ["02", "Management", "Meet the leadership team driving technical excellence, disciplined manufacturing and continuous improvement at VPI.", "/management"],
-    ["03", "CSR", "VPI combines responsible manufacturing with skill development, ethical business practices and a commitment to building stronger communities.", "/csr"],
-    ["04", "Company Vision", "Our mission is to drive innovation through precision engineering and sustainable manufacturing practices that empower communities and build nations.", "/vision"],
-    ["05", "Company History", "From VP Industries in 1983 to VPI Innovative Solutions, our journey has been shaped by engineering, machining expertise and a commitment to progress.", "/history"],
-    ["06", "Why Us", "Precision-driven, people-focused and purpose-led manufacturing backed by advanced CNC infrastructure and in-house engineering expertise.", "/why-us"],
-    ["07", "R&D", "Our NPD and R&D work covers process development, tooling, collet chucks, revolving centres, fixtures and complex machining challenges.", "/rd"],
+    ["03", "CSR", "Responsible manufacturing, ethical business practices, skill development and community-focused initiatives.", "/csr"],
+    ["04", "Company Vision", "We empower industries with smart, sustainable and forward-thinking solutions through innovation and responsibility.", "/vision"],
+    ["05", "Company History", "From VP Industries in 1983 to VPI Innovative Solutions, our journey has been shaped by engineering and machining expertise.", "/history"],
+    ["06", "Why Us", "Precision-driven, people-focused and purpose-led manufacturing backed by advanced CNC infrastructure.", "/why-us"],
+    ["07", "R&D", "New product development, process development, tooling, collet chucks, revolving centres and complex machining solutions.", "/rd"],
   ];
   return <div className="company-page">
-    <PageHero number="01" eyebrow="VPI / COMPANY" title="Built on Precision." accent="Driven by Innovation." lead="A precision manufacturing partner for demanding industries." image={factoryImage} />
-    <PageIntro kicker="VPI Innovative Solutions" title={<>Engineering <em>with purpose.</em></>}><p className="page-lead">VPI Innovative Solutions is a precision engineering and manufacturing company based in Mysuru, India. We combine advanced CNC infrastructure, technical expertise and process discipline to manufacture high-precision components, CNC collet chucks, revolving centres and application-specific tooling.</p></PageIntro>
+    <PageHero number="01" eyebrow="VPI / COMPANY" title="Built on Precision." accent="Driven by Innovation." lead="A precision manufacturing partner for demanding industries." image="/vpi/heroes/services-hero.png" />
+    <PageIntro kicker="VPI Innovative Solutions" title={<>Engineering <em>with purpose.</em></>}>
+      <p className="page-lead">VPI Innovative Solutions is a precision engineering and manufacturing company based in Mysuru, India. We combine advanced CNC infrastructure, technical expertise and process discipline to manufacture high-precision components, CNC collet chucks, revolving centres and application-specific tooling.</p>
+    </PageIntro>
     <section className="company-overview-grid page-pad" data-theme="dark">
-      {companyCards.map(([number, title, copy, path]) => <Link to={path} className="company-overview-card" key={path} onMouseMove={spotlightMove}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p><span className="text-link">EXPLORE <ArrowUpRight size={14} /></span></Link>)}
+      {companyCards.map(([number, title, copy, path]) => <Link to={path} className="company-overview-card" key={path}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p><span className="text-link">EXPLORE <ArrowUpRight size={14} /></span></Link>)}
     </section>
     <section className="company-mission page-pad" data-theme="steel"><div><span className="eyebrow cyan">OUR MISSION</span><h2>Precision manufacturing.<br /><em>Responsible growth.</em></h2></div><p className="page-lead">Driving innovation through precision engineering and sustainable manufacturing practices that empower communities and build nations.</p></section>
   </div>;
@@ -338,8 +346,11 @@ export function WhyUsPage() { return <OfficialPage eyebrow="WHY US" title="Why V
 export function RDPage() { return <OfficialPage eyebrow="RESEARCH & DEVELOPMENT" title="Driving Precision Through" accent="Applied Engineering" lead="Core R&D Competencies" kicker="New Product Development (NPD)" image={productImages.comp3} paragraphs={["We develop an average of 30% NPDs monthly. Our R&D team works closely with production and quality to generate robust process sheets, tool layouts, and fixture designs for each new component.", "We design and test custom CNC collet chucks, revolving centers, and special tool holders. Each tool goes through 3D modeling, simulation, stress analysis (linear/static), and prototyping before being released to production."]} bullets={["Tight tolerances", "Unconventional geometries", "Multi-axis operations", "Complex machining sequences", "High-speed machining", "Stability during interrupted cuts", "Quick changeover and repeatability", "Load distribution to reduce tool wear"]} />; }
 
 function IndustryPage({ data }) {
-  return <div className="industry-page"><PageHero number="01" eyebrow="INDUSTRY" title={data.title} accent="" lead="Welcome to VPI Innovative Industries" image={data.image} /><PageIntro kicker={data.title.replace(/Industry|INDUSTRY/i, "").trim() + " Summary"} title={<>Precision for<br /><em>real applications.</em></>}><ScrollText className="page-lead" text={data.summary} /><span className="eyebrow cyan">Technical Capabilities</span>{data.technical.split("\n\n").map((p, i) => <p key={i} className="body-copy">{p}</p>)}<span className="eyebrow cyan">Materials We Machine</span><div className="detail-list">{data.materials.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div><span className="eyebrow cyan">{data.finishingTitle}</span><div className="detail-list">{data.finishing.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div><span className="eyebrow cyan">{data.focusTitle}</span><p className="body-copy">{data.focus}</p><LinkButton to="/contact">CONTACT US</LinkButton></PageIntro><section className="media-grid page-pad" data-theme="dark">{data.gallery.map((image) => <Reveal key={image} className="media-card-wrap"><div className="media-card"><div className="media-card-image"><img src={image} alt={data.title} loading="lazy" /></div></div></Reveal>)}</section><VpiVisionFooter /></div>;
+  return <div className="industry-page"><PageHero number="01" eyebrow="INDUSTRY" title={data.title} accent="" lead="Welcome to VPI Innovative Industries" image={data.gallery?.[0] || "/vpi/industry/automotive.png"} /><PageIntro kicker={data.title.replace(/Industry|INDUSTRY/i, "").trim() + " Summary"} title={<>Precision for<br /><em>real applications.</em></>}>
+    <p className="page-lead">{data.summary}</p><span className="eyebrow cyan">Technical Capabilities</span>{data.technical.split("\n\n").map((p, i) => <p key={i} className="body-copy">{p}</p>)}<span className="eyebrow cyan">Materials We Machine</span><div className="detail-list">{data.materials.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div><span className="eyebrow cyan">{data.finishingTitle}</span><div className="detail-list">{data.finishing.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div><span className="eyebrow cyan">{data.focusTitle}</span><p className="body-copy">{data.focus}</p><LinkButton to="/contact">CONTACT US</LinkButton>
+  </PageIntro><section className="media-grid page-pad" data-theme="dark">{data.gallery.map((image) => <div key={image} className="media-card-wrap"><div className="media-card"><div className="media-card-image"><img src={image} alt={data.title} loading="lazy" /></div></div></div>)}</section></div>;
 }
+
 export function AutomotivePage() { return <IndustryPage data={industryData.automotive} />; }
 export function ElectronicsPage() { return <IndustryPage data={industryData.electronics} />; }
 export function RoboticsPage() { return <IndustryPage data={industryData.robotics} />; }

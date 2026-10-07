@@ -1143,3 +1143,15 @@ html, body, #root, .site-shell {
 .company-mission {
   background: #e9eaf0 !important;
 }
+
+
+/* FINAL ROUTE RELIABILITY */
+.route-content { display:block; min-height:1px; opacity:1 !important; visibility:visible !important; }
+.company-page, .industries-page, .official-page, .industry-page { display:block !important; opacity:1 !important; visibility:visible !important; }
+.company-overview-grid, .industry-overview { opacity:1 !important; visibility:visible !important; }
+.company-overview-card, .industry-card { opacity:1 !important; visibility:visible !important; transform:none; }
+.company-overview-card:hover, .industry-card:hover { transform:translateY(-6px); }
+.route-error { min-height:70vh; display:grid; align-content:center; gap:1rem; padding:8rem 6vw; background:#121212; color:#fff; }
+.route-error h1 { max-width:800px; font-size:clamp(3rem,7vw,7rem); line-height:.9; }
+.route-error p { max-width:650px; color:#cfd2da; line-height:1.7; }
+.route-error a { color:#fff; font-weight:700; letter-spacing:.08em; }
