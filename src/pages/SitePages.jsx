@@ -135,7 +135,10 @@ function LinkButton({ to, children, testId }) {
 }
 
 function PageIntro({ kicker, title, children, number = "02" }) {
-  return <section className="page-intro page-pad" data-theme="steel"><Reveal className="section-number">{number} <span>/ 06</span></Reveal><Reveal delay={0.08}><span className="eyebrow cyan">{kicker}</span><h2>{title}</h2>{children}</Reveal></section>;
+  return <section className="page-intro page-pad" data-theme="steel">
+    <div className="section-number">{number} <span>/ 06</span></div>
+    <div className="page-intro-content"><span className="eyebrow cyan">{kicker}</span><h2>{title}</h2>{children}</div>
+  </section>;
 }
 
 function MetricStrip({ items }) {
@@ -252,7 +255,7 @@ export function CompanyPage() {
     <PageHero number="01" eyebrow="VPI / COMPANY" title="Built on Precision." accent="Driven by Innovation." lead="A precision manufacturing partner for demanding industries." image={factoryImage} />
     <PageIntro kicker="VPI Innovative Solutions" title={<>Engineering <em>with purpose.</em></>}><p className="page-lead">VPI Innovative Solutions is a precision engineering and manufacturing company based in Mysuru, India. We combine advanced CNC infrastructure, technical expertise and process discipline to manufacture high-precision components, CNC collet chucks, revolving centres and application-specific tooling.</p></PageIntro>
     <section className="company-overview-grid page-pad" data-theme="dark">
-      {companyCards.map(([number, title, copy, path]) => <Reveal key={path}><Link to={path} className="company-overview-card" onMouseMove={spotlightMove}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p><span className="text-link">EXPLORE <ArrowUpRight size={14} /></span></Link></Reveal>)}
+      {companyCards.map(([number, title, copy, path]) => <Link to={path} className="company-overview-card" key={path} onMouseMove={spotlightMove}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p><span className="text-link">EXPLORE <ArrowUpRight size={14} /></span></Link>)}
     </section>
     <section className="company-mission page-pad" data-theme="steel"><div><span className="eyebrow cyan">OUR MISSION</span><h2>Precision manufacturing.<br /><em>Responsible growth.</em></h2></div><p className="page-lead">Driving innovation through precision engineering and sustainable manufacturing practices that empower communities and build nations.</p></section>
   </div>;

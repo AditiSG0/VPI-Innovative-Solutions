@@ -10,3 +10,9 @@ body { margin: 0; min-width: 320px; background: #ffffff; color: #18202a; font-fa
 button, input, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 ::selection { background: #ffbd17; color: #101828; }
+
+/* VPI SURFACE: black site canvas */
+html, body, #root {
+  background: #121212;
+  color: #ffffff;
+}

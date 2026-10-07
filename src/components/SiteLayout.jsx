@@ -21,8 +21,8 @@ export default function SiteLayout() {
     const raf = (time) => lenis.raf(time * 1000);
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
-    ScrollTrigger.normalizeScroll(true);
-    return () => { gsap.ticker.remove(raf); lenis.destroy(); lenisRef.current = null; ScrollTrigger.normalizeScroll(false); };
+    // Keep native page navigation reliable; Lenis handles smooth wheel scrolling without hijacking route loading.
+    return () => { gsap.ticker.remove(raf); lenis.destroy(); lenisRef.current = null; };
   }, []);
 
   useEffect(() => {

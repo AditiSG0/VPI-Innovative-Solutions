@@ -1106,3 +1106,40 @@ body { color: var(--vpi-ink); }
 @media (max-width: 700px) {
   .company-overview-grid, .company-mission { grid-template-columns:1fr; }
 }
+
+/* ROUTE CONTENT SAFETY: company/industry pages must remain visible even if motion/scroll observers are unavailable. */
+.page-intro-content { min-width: 0; }
+.company-overview-card, .industry-card { opacity: 1 !important; visibility: visible !important; }
+.page-intro, .company-overview-grid, .industry-overview, .official-extra { content-visibility: visible !important; }
+
+/* FINAL SURFACE COLOUR: BLACK */
+html, body, #root, .site-shell {
+  background-color: #121212 !important;
+}
+.site-shell {
+  background: #121212 !important;
+}
+.site-header,
+.site-header.is-scrolled {
+  background: rgba(18,18,18,.96) !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+.nav-link, .nav-dropdown button, .nav-dropdown a {
+  color: #fff !important;
+}
+.nav-dropdown {
+  background: #121212 !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.14) !important;
+}
+.mobile-trigger {
+  background: #121212 !important;
+  color: #fff !important;
+}
+/* Keep intentionally light content sections light for contrast, while the site canvas stays black. */
+.page-intro, .home-overview, .official-extra, .spec-section, .process-section,
+.media-grid, .product-overview, .home-on-demand, .roles-section, .contact-section,
+.company-mission {
+  background: #e9eaf0 !important;
+}
