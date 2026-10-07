@@ -10,6 +10,8 @@ import VpiTimeline from "@/components/VpiTimeline";
 import RoboticsShowcase from "@/components/RoboticsShowcase";
 import QuoteForm from "@/components/QuoteForm";
 import HeroScrollMedia from "@/components/HeroScrollMedia";
+import RoboticsLanding from "@/components/RoboticsLanding";
+import { CompanyDetail } from "@/components/VpiCompanyDetail";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,6 +65,7 @@ const industries = [
 const industryData = {
   automotive: {
     title: "Automobile Industry",
+    hero: "https://in.pinterest.com/pin/473089135859899970/",
     slugTitle: "Automotive Industry",
     image: machineImages[0],
     summary: "At VPI Innovative Solutions, we manufacture high-precision automotive components that meet the industry’s most demanding standards for accuracy, reliability, and performance. From prototypes to large-scale production, our parts support critical systems such as fuel injection, transmission, braking, steering, and sensor assemblies.",
@@ -76,6 +79,7 @@ const industryData = {
   },
   electronics: {
     title: "Electronics Industry",
+    hero: "https://in.pinterest.com/pin/770960029942441388/",
     image: machineImages[1],
     summary: "At VPI Innovative Solutions, we specialize in the manufacture of precision-machined components for the electronics and semiconductor industry, where compactness, accuracy, and surface quality are critical. Our machining systems are optimized for micro-scale components as small as 0.5 mm, ensuring precise dimensional control and consistent quality in every production batch.",
     technical: "Equipped with multi-axis CNC machining, turn-mill centers, and sliding head technology, we produce micro and miniature precision parts with stable dimensional accuracy and burr-free edges.\n\nOur inspection infrastructure, powered by Mitutoyo CMM, profile projectors, and surface roughness measurement systems, ensures full traceability and compliance with electronic component standards.",
@@ -88,6 +92,7 @@ const industryData = {
   },
   robotics: {
     title: "Robotics Industry",
+    hero: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4",
     image: machineImages[2],
     summary: "At VPI Innovative Solutions, we manufacture precision-engineered components used in robotic assemblies, motion systems, and automation modules. Our parts are designed to deliver dimensional accuracy, repeatability, and stability required for robotic actuation, control, and sensor integration.\n\nWe routinely produce components within ±5–6 micron tolerances, ensuring perfect fitment and alignment in complex assemblies.",
     technical: "With multi-axis CNC machining, turn-mill, and sliding head technology, we manufacture intricate components requiring simultaneous operations and close-tolerance control.\n\nDimensional verification is carried out using Mitutoyo CMM systems and precision metrology equipment, ensuring compliance with design specifications.",
@@ -100,6 +105,7 @@ const industryData = {
   },
   medical: {
     title: "Medical Industry",
+    hero: "https://in.pinterest.com/pin/4594305041611213696/",
     image: productImages.comp6,
     summary: "At VPI Innovative Solutions, we manufacture precision components used in medical equipment and critical healthcare devices, where accuracy, reliability, and cleanliness are essential. Our machining processes and inspection controls ensure every part meets stringent biocompatibility and dimensional standards required in the medical domain.",
     technical: "Our infrastructure includes multi-axis CNC machining, turn-mill centers, and sliding head technology, enabling the manufacture of intricate geometries and close-tolerance fits.\n\nEvery process is validated through statistical process control (SPC) and verified using Mitutoyo CMM systems, contour measurement, and surface roughness analysis to maintain full traceability and compliance with customer requirements.",
@@ -110,6 +116,20 @@ const industryData = {
     focus: "Through advanced process engineering, precision machining, and rigorous quality validation, VPI Innovative Solutions supports the medical sector with components that deliver functional accuracy, mechanical integrity, and long-term reliability in every critical assembly.",
     gallery: [productImages.comp6, productImages.comp2, productImages.comp1, productImages.comp7],
   },
+  aerospace: {
+    title: "Aerospace Industry",
+    hero: "https://in.pinterest.com/pin/565624034459385684/",
+    image: industryImages.aerospace,
+    summary: "VPI supports aerospace and space applications with precision-engineered, mission-critical components where dimensional accuracy, material performance and repeatability are essential.",
+    technical: "Our advanced CNC capabilities support complex aerospace geometries, close tolerances and controlled production. Quality systems and inspection processes are applied throughout manufacturing to maintain consistency and traceability.",
+    materials: ["Titanium alloys", "Aerospace-grade stainless steels", "High-strength aluminium alloys", "Nickel-based and other difficult-to-machine alloys"],
+    finishingTitle: "Post-Machining & Finishing",
+    finishing: ["Precision grinding and super-finishing", "Controlled deburring and surface preparation", "Heat treatment and specialist surface treatments as required"],
+    focusTitle: "Our Focus",
+    focus: "Precision, repeatability and process control for demanding aviation and space applications.",
+    gallery: [industryImages.aerospace, machineImages[0], productImages.comp7, productImages.components],
+  },
+
 };
 
 const vgHeaders = ["Model", "Spindle", "Max RPM", "Weight (kg)", "Operating Force (kN/kgf)", "Clamping Force (kN/kgf)", "Sleeve Stroke (mm)", "Min-Max l (mm)", "Min-Max n (mm)", "Min-Max u (mm)"];
@@ -128,7 +148,12 @@ const vgRows = [
 
 function PageHero({ number, eyebrow, title, accent, lead, image = factoryImage }) {
   return <section className="inner-hero" data-theme="dark" data-testid="page-hero">
-    <div className="inner-hero-image">{image ? <img src={image} alt="VPI Innovative Solutions" onError={(e) => { e.currentTarget.style.display = "none"; }} /> : null}<div /></div>
+    <div className="inner-hero-image">{image ? <img src={image} alt="VPI Innovative Solutions" onError={(e) => {
+      const fallbacks = { Automobile: "/vpi/industry/automotive.png", Electronics: "/vpi/industry/electronics.png", Medical: "/vpi/industry/medical.png", Aerospace: "/vpi/industry/aerospace.png" };
+      const key = String(title || "").replace(/ Industry$/i, "");
+      if (String(image).includes("pinterest") && fallbacks[key] && e.currentTarget.src !== new URL(fallbacks[key], window.location.href).href) e.currentTarget.src = fallbacks[key];
+      else e.currentTarget.style.opacity = ".15";
+    }} /> : null}<div /></div>
     <div className="page-pad inner-hero-content">
       <span className="eyebrow cyan">{eyebrow} / {number}</span>
       <h1>{title}{accent ? <><br /><em>{accent}</em></> : null}</h1>
@@ -190,9 +215,7 @@ function OfficialPage({ eyebrow, title, accent, lead, kicker, image, paragraphs 
   );
 }
 
-export function AerospacePage() {
-  return <SimpleIndustryPage title="Aerospace Industry" copy="VPI supports aerospace and space applications with precision-engineered, mission-critical components where dimensional accuracy, material performance and repeatability are essential. Our advanced CNC capabilities and quality systems are designed for demanding aviation and space requirements." />;
-}
+export function AerospacePage() { return <IndustryPage data={industryData.aerospace} />; }
 
 export function IndustriesPage() {
   return <div className="industries-page">
@@ -248,112 +271,20 @@ export function HomePage() {
 }
 
 export function CompanyPage() {
-  const companyCards = [
-    ["01", "About Us", "Since 2005, VPI Innovative Solutions has built its reputation around precision engineering, CNC machining, custom tooling and reliable component manufacturing.", "/about"],
-    ["02", "Management", "Meet the leadership team driving technical excellence, disciplined manufacturing and continuous improvement at VPI.", "/management"],
-    ["03", "CSR", "Responsible manufacturing, ethical business practices, skill development and community-focused initiatives.", "/csr"],
-    ["04", "Company Vision", "We empower industries with smart, sustainable and forward-thinking solutions through innovation and responsibility.", "/vision"],
-    ["05", "Company History", "From VP Industries in 1983 to VPI Innovative Solutions, our journey has been shaped by engineering and machining expertise.", "/history"],
-    ["06", "Why Us", "Precision-driven, people-focused and purpose-led manufacturing backed by advanced CNC infrastructure.", "/why-us"],
-    ["07", "R&D", "New product development, process development, tooling, collet chucks, revolving centres and complex machining solutions.", "/rd"],
-  ];
-  return <div className="company-page">
-    <PageHero number="01" eyebrow="VPI / COMPANY" title="Built on Precision." accent="Driven by Innovation." lead="A precision manufacturing partner for demanding industries." image="/vpi/heroes/services-hero.png" />
-    <PageIntro kicker="VPI Innovative Solutions" title={<>Engineering <em>with purpose.</em></>}>
-      <p className="page-lead">VPI Innovative Solutions is a precision engineering and manufacturing company based in Mysuru, India. We combine advanced CNC infrastructure, technical expertise and process discipline to manufacture high-precision components, CNC collet chucks, revolving centres and application-specific tooling.</p>
-    </PageIntro>
-    <section className="company-overview-grid page-pad" data-theme="dark">
-      {companyCards.map(([number, title, copy, path]) => <Link to={path} className="company-overview-card" key={path}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p><span className="text-link">EXPLORE <ArrowUpRight size={14} /></span></Link>)}
-    </section>
-    <section className="company-mission page-pad" data-theme="steel"><div><span className="eyebrow cyan">OUR MISSION</span><h2>Precision manufacturing.<br /><em>Responsible growth.</em></h2></div><p className="page-lead">Driving innovation through precision engineering and sustainable manufacturing practices that empower communities and build nations.</p></section>
-  </div>;
+  const cards=[['01','About Us','/about'],['02','Management','/management'],['03','CSR','/csr'],['04','Company Vision','/vision'],['05','Company History','/history'],['06','Why Us','/why-us'],['07','R&D','/rd']];
+  return <div className="company-page"><PageHero number="01" eyebrow="VPI / COMPANY" title="Built on Precision." accent="Driven by Innovation." lead="A precision manufacturing partner for demanding industries." image="/vpi/heroes/services-hero.png"/><section className="company-overview-grid page-pad" data-theme="dark">{cards.map(([n,t,p])=><Link to={p} className="company-overview-card" key={p}><span className="service-number">{n}</span><h3>{t}</h3><p>Explore the official VPI information, engineering capabilities and story behind this part of the company.</p><span className="text-link">EXPLORE <ArrowUpRight size={14}/></span></Link>)}</section></div>;
 }
 
-export function AboutPage() { return <OfficialPage eyebrow="ABOUT US" title="About Us" accent="" lead="Welcome to VPI Innovative Solutions" kicker="Short About VPI" image={aboutBgImage} paragraphs={["Since our inception in 2005, VPI Innovative Solutions has been at the forefront of precision engineering, offering high-performance machining and component manufacturing solutions tailored to the evolving demands of global industries. Based in Mysore, India, we serve as a trusted partner to organizations that value quality, innovation, and reliability above all else.", "At the heart of our operations lies a commitment to technical excellence and manufacturing integrity. Our advanced CNC infrastructure includes multi-axis milling, turn-mill centers, sliding head technology, EDMs, and high-precision grinders—sourced from global leaders such as Mazak, Tsugami, Matsuura, DMG, Citizen, and more.", "In addition to machining critical components, VPI also designs and manufactures high-speed CNC collet chucks and revolving centers, engineered specifically to meet the exacting standards of today’s high-speed, high-precision applications. These in-house solutions reflect our deep understanding of tool-holding dynamics and spindle performance, enabling improved stability, repeatability, and surface finish in demanding machining environments. Our team of engineers and technical experts operates with a clear vision: to blend innovation with process discipline, ensuring that every product meets international benchmarks in quality, reliability, and consistency. From prototyping to production, every stage is guided by data-driven decisions, risk-based thinking, and an uncompromising eye for detail.", "VPI Innovative Solutions – Your Precision Partner in Progress."], extraTitle="Our Machines", extraParagraphs=["Where Innovation Meets Precision in a Culture of Collaboration", "At VPI, our machines are the backbone of precision and performance. We operate advanced CNC machines and cutting-edge metalworking equipment to deliver high-quality results with unmatched accuracy.", "Each machine is maintained to the highest standards, ensuring reliability and efficiency. From milling and turning to custom fabrication, our technology supports a wide range of manufacturing needs."], extraBullets=["25+ Machines", "State-of-the-art equipment", "0.01mm Tolerance", "Unmatched precision", "50+ Experts", "Innovation Hub", "Continuous improvement"], extraImage="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&ixlib=rb-1.2.1&q=80&w=1350"} />; }
-export function ManagementPage() {
-  const managementHero = "https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/pexels-olly-3760089.jpg";
-  const ceoPhoto = "https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/Mr-Gowrishankar-Sanjay-CEO.jpg";
-  const ceoPhotoAlt = "https://vpiinnovativesolutions.com/wp-content/uploads/2025/06/Mr-Gowrishankar-Sanjay-CEO.png";
-  const mission = [
-    "Work collaboratively across departments to solve engineering problems practically and efficiently.",
-    "Stay updated with the latest machining technologies to ensure process excellence.",
-    "Own quality at every stage—from planning to production to delivery.",
-    "Foster a culture of learning, mentorship, and integrity.",
-    "Align personal growth with organizational goals and national purpose.",
-  ];
-  const visionPillars = ["Precision Manufacturing", "NPD-Driven Growth", "Nation-Building", "Skill Empowerment"];
-  return <div className="management-page">
-    <PageHero number="01" eyebrow="MANAGEMENT" title="Management" accent="" lead="Welcome to VPI Innovative Solutions" image={managementHero} />
-
-    <section className="management-profiles page-pad" data-theme="dark">
-      <Reveal className="management-profile management-profile-ceo" onMouseMove={spotlightMove}>
-        <div className="management-profile-media">
-          <img src={ceoPhoto} alt="Mr Gowrishankar Sanjay-CEO" onError={(event) => { if (event.currentTarget.src !== ceoPhotoAlt) event.currentTarget.src = ceoPhotoAlt; else event.currentTarget.src = factoryImage; }} />
-          <span className="management-photo-label">MANAGEMENT / 01</span>
-        </div>
-        <div className="management-profile-copy">
-          <span className="eyebrow cyan">Mr. Gowrishankar Sanjay</span>
-          <h3>Mr. Gowrishankar Sanjay</h3>
-          <div className="management-role">( Managing Director &amp; CEO )</div>
-          <p>Mr. Gowrishankar Sanjay, an accomplished engineer with over 35 years of experience in manufacturing and advanced engineering solutions, is widely recognized for his precision-driven leadership and unwavering pursuit of technical excellence. A perfectionist by nature, he thrives on leading teams through challenging projects that push the boundaries of innovation and performance.</p>
-        </div>
-      </Reveal>
-
-      <Reveal className="management-profile management-profile-senior" delay={0.08} onMouseMove={spotlightMove}>
-        <div className="management-profile-visual">
-          <div className="management-monogram">TVK</div>
-          <span className="management-photo-label">MANAGEMENT / 02</span>
-        </div>
-        <div className="management-profile-copy">
-          <span className="eyebrow cyan">Mr. T.V. Dinesh Kumar</span>
-          <h3>Mr. T.V. Dinesh Kumar</h3>
-          <div className="management-role">( Senior Manager )</div>
-          <p>Mr. T.V. Dinesh Kumar,  is widely regarded as the backbone of the team, the steady force who ensures collaboration, consistency, and excellence across every project. A skilled engineer by profession and a leader by temperament, he blends technical acumen with humility, creating an environment where innovation and teamwork thrive.</p>
-        </div>
-      </Reveal>
-    </section>
-
-    <section className="management-mission page-pad" data-theme="steel">
-      <Reveal className="management-section-head">
-        <span className="eyebrow cyan">CEO'S MISSION</span>
-        <h2>CEO's<br /><em>MISSION</em></h2>
-      </Reveal>
-      <div className="management-mission-list">
-        {mission.map((item, index) => <Reveal key={item} delay={0.06 + index * 0.05}><div className="management-list-row"><span className="service-number">0{index + 1}</span><p>{item}</p></div></Reveal>)}
-      </div>
-    </section>
-
-    <section className="management-vision page-pad" data-theme="dark">
-      <Reveal className="management-section-head">
-        <span className="eyebrow cyan">CEO'S VISION</span>
-        <h2>CEO's<br /><em>VISION</em></h2>
-      </Reveal>
-      <Reveal className="management-vision-copy" delay={0.06}>
-        <p className="page-lead">To build a technically sound, accountable, and agile workforce capable of solving complex manufacturing challenges and driving innovation on the shopfloor and beyond.</p>
-      </Reveal>
-      <div className="management-pillars">
-        {visionPillars.map((item, index) => <Reveal key={item} delay={0.1 + index * 0.05}><div className="management-pillar"><span className="service-number">0{index + 1}</span><h3>{item}</h3></div></Reveal>)}
-      </div>
-    </section>
-
-    <VpiVisionFooter />
-  </div>;
-}
-export function CSRPage() { return <OfficialPage eyebrow="CORPORATE SOCIAL RESPONSIBILITY" title="Commitment Beyond" accent="Business" lead="Corporate Social Responsibility - VPI Innovative Solutions" kicker="Environmental Responsibility" image={factoryImage} paragraphs={["We actively engage in sustainable practices to reduce our environmental footprint while maximizing operational efficiency."]} bullets={["✔ Energy-conscious operations and machine optimization", "✔ Responsible waste management & recycling", "✔ Use of non-toxic, eco-friendly materials", "✔ Adoption of sustainable technologies"]} extraTitle="Ethical Business Practices" extraParagraphs={["At VPI, ethics and transparency guide every decision we make. We are committed to conducting business with the highest standards of fairness, accountability, and respect.", "At VPI Innovative Solutions, we take immense pride in being associated with government-backed initiatives aimed at empowering India’s youth. As part of our ongoing commitment to nation-building and inclusive growth, we have partnered with national and regional skill development missions to offer short-term training programs designed to bridge the gap between academic learning and real-world industrial application.", "All of this takes place at Ksetra Tech Park – Land of Merit, our dedicated hub for learning, innovation, and talent nurturing.", "We believe that by investing in education and practical training, we’re not just developing individuals—we’re contributing to the future workforce of India."], extraBullets=["✔ Equal opportunity employment and a safe, inclusive workplace", "✔ Strict anti-corruption and anti-discrimination policies", "✔ Open, transparent communication with all stakeholders", "✔ Respect for labor laws, human rights, and social norms", "✔ Hands-on exposure to advanced CNC machining, metrology, tool setting, and manufacturing workflows", "✔ Real-time experience in a working production environment", "✔ Industry-oriented mentoring from experienced professionals", "✔ Assessments and certifications aligned with government guidelines"]} />; }
-export function VisionPage() { return <OfficialPage eyebrow="COMPANY VISION" title="Company’s Vision" accent="& Mission" lead="To be a trusted partner in precision manufacturing and innovation." kicker="Our Mission" image={factoryImage} paragraphs={["Driving innovation through precision engineering and sustainable manufacturing practices that empower communities and build nations"]} bullets={["Deliver CNC components, collet chucks, and revolving centers engineered for high-speed, high-accuracy performance with systemized quality control.", "Allocate 30% of operational capacity to New Product Development—enabling fast prototyping, CAM-led process planning, and tooling innovation.", "Support Make in India and Aatmanirbhar Bharat through indigenous manufacturing and strategic supply chains.", "Provide training and technical development to students, operators, and engineers through Ksetra Tech Park, aligned with government skilling initiatives.", "We operate with zero-defect goals, systemic process discipline, and a culture of continuous improvement while staying environmentally and ethically compliant."]} extraTitle="Team Vision & Mission" extraParagraphs={["Team Vision: To build a technically sound, accountable, and agile workforce capable of solving complex manufacturing challenges and driving innovation on the shopfloor and beyond."]} extraBullets={["Work collaboratively across departments to solve engineering problems practically and efficiently.", "Stay updated with the latest machining technologies to ensure process excellence.", "Own quality at every stage—from planning to production to delivery.", "Foster a culture of learning, mentorship, and integrity.", "Align personal growth with organizational goals and national purpose."]} />; }
-export function HistoryPage() { return <OfficialPage eyebrow="COMPANY HISTORY" title="Our Journey:" accent="From Vision to Innovation" lead="Welcome to VPI Innovative Solutions" kicker="Our Legacy - Our Journey" image={productImages.components} paragraphs={["VP Industries was established in 1983 by our visionary founder, Late Shri V. Gowrishankar. With a strong desire to generate employment and uplift non-technical individuals by skilling them with passion, he set the foundation for what we are today. Despite being a B.Com graduate, his innate engineering talent led him to design and manufacture machines—including Special Purpose Machines (SPMs)—primarily focused on affordable, high-productivity solutions for the woodworking industry.", "After his passing in July 1987, the company expanded its focus to machining services, initially supporting manufacturers of CAN making machines and other industrial equipment. By 1988, we began providing job work services to Larsen & Toubro (L&T), marking the beginning of a long and transformative partnership. Through L&T’s supplier development programs—conducted in collaboration with SJCE_STEP in the early 1990s—we were exposed to ISO systems and best manufacturing practices, which played a pivotal role in shaping our quality-driven approach. Around the same time, we also began servicing Automotive Axles Ltd., further broadening our industry reach."]} />; }
-export function WhyUsPage() { return <OfficialPage eyebrow="WHY US" title="Why VPI is Right" accent="Choice for You" lead="Precision-Driven. People-Focused. Purpose-Led." kicker="Why VPI Innovative Solutions" image={factoryImage} paragraphs={["With a deep focus on CNC turning, milling, grinding, and tool design, we manufacture components that meet the tightest tolerances and the most demanding standards. Whether it’s a high-speed collet chuck or a critical aerospace part, precision is our promise.", "We house an extensive range of high-end machines—from Mazak and Tsugami to Chiron, DMG, and Tornos. Combined with our in-house team of CAM programmers, tool designers, and quality engineers, we provide end-to-end solutions under one roof.", "We meet international standards while maintaining the agility and responsiveness of a local partner. Our customers across sectors—from automotive to industrial automation—rely on us for both performance and peace of mind.", "Whether you’re a startup looking for a development partner or an established OEM scaling up, we adapt. From small batches to mass production, we bring speed, control, and flexibility to every stage of your journey.", "From custom tool holding solutions to process development, we don’t stop at what works—we pursue what works best. Innovation is part of our DNA, with every product designed to maximize performance, life, and accuracy.", "Our commitment goes beyond machining: We support sustainable practices. We invest in skill-building through Ksetra Tech Park – Land of Merit. We uphold ethical and inclusive business values. You’re not just choosing a vendor—you’re choosing a company that cares.", "We believe in creating relationships built on trust, communication, and consistency. That’s why our clients stay with us, year after year. Choose VPI Innovative Solutions. Where every micron matters, and every customer counts."]} />; }
-export function RDPage() { return <OfficialPage eyebrow="RESEARCH & DEVELOPMENT" title="Driving Precision Through" accent="Applied Engineering" lead="Core R&D Competencies" kicker="New Product Development (NPD)" image={productImages.comp3} paragraphs={["We develop an average of 30% NPDs monthly. Our R&D team works closely with production and quality to generate robust process sheets, tool layouts, and fixture designs for each new component.", "We design and test custom CNC collet chucks, revolving centers, and special tool holders. Each tool goes through 3D modeling, simulation, stress analysis (linear/static), and prototyping before being released to production."]} bullets={["Tight tolerances", "Unconventional geometries", "Multi-axis operations", "Complex machining sequences", "High-speed machining", "Stability during interrupted cuts", "Quick changeover and repeatability", "Load distribution to reduce tool wear"]} />; }
-
-function IndustryPage({ data }) {
-  return <div className="industry-page"><PageHero number="01" eyebrow="INDUSTRY" title={data.title} accent="" lead="Welcome to VPI Innovative Industries" image={data.gallery?.[0] || "/vpi/industry/automotive.png"} /><PageIntro kicker={data.title.replace(/Industry|INDUSTRY/i, "").trim() + " Summary"} title={<>Precision for<br /><em>real applications.</em></>}>
-    <p className="page-lead">{data.summary}</p><span className="eyebrow cyan">Technical Capabilities</span>{data.technical.split("\n\n").map((p, i) => <p key={i} className="body-copy">{p}</p>)}<span className="eyebrow cyan">Materials We Machine</span><div className="detail-list">{data.materials.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div><span className="eyebrow cyan">{data.finishingTitle}</span><div className="detail-list">{data.finishing.map((item) => <div key={item}><CheckCircle2 size={16} /><span>{item}</span></div>)}</div><span className="eyebrow cyan">{data.focusTitle}</span><p className="body-copy">{data.focus}</p><LinkButton to="/contact">CONTACT US</LinkButton>
-  </PageIntro><section className="media-grid page-pad" data-theme="dark">{data.gallery.map((image) => <div key={image} className="media-card-wrap"><div className="media-card"><div className="media-card-image"><img src={image} alt={data.title} loading="lazy" /></div></div></div>)}</section></div>;
-}
-
+export function AboutPage() { return <CompanyDetail type="about" />; }
+export function ManagementPage() { return <CompanyDetail type="management" />; }
+export function CSRPage() { return <CompanyDetail type="csr" />; }
+export function VisionPage() { return <CompanyDetail type="vision" />; }
+export function HistoryPage() { return <CompanyDetail type="history" />; }
+export function WhyUsPage() { return <CompanyDetail type="why" />; }
+export function RDPage() { return <CompanyDetail type="rd" />; }
 export function AutomotivePage() { return <IndustryPage data={industryData.automotive} />; }
 export function ElectronicsPage() { return <IndustryPage data={industryData.electronics} />; }
-export function RoboticsPage() { return <IndustryPage data={industryData.robotics} />; }
+export function RoboticsPage() { return <RoboticsLanding />; } />; }
 export function MedicalPage() { return <IndustryPage data={industryData.medical} />; }
 
 export function ServicesPage() {
