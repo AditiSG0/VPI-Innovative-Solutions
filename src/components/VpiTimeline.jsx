@@ -16,70 +16,55 @@ const milestones = [
 ];
 
 export default function VpiTimeline() {
-  const sectionRef = useRef(null);
-  const lineRef = useRef(null);
-  const fillRef = useRef(null);
   const [active, setActive] = useState(0);
+  const itemRefs = useRef([]);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const line = lineRef.current;
-    const fill = fillRef.current;
-    if (!section || !line || !fill) return undefined;
+    const nodes = itemRefs.current.filter(Boolean);
+    if (!nodes.length) return undefined;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = Number(entry.target.dataset.milestone);
+          setActive(index);
+        }
+      });
+    }, { rootMargin: "-35% 0px -45% 0px", threshold: 0 });
+    nodes.forEach(node => observer.observe(node));
 
-    const triggers = milestones.map((_, index) => ScrollTrigger.create({
-      trigger: section.querySelector(`[data-milestone="${index}"]`),
-      start: "top 60%",
-      end: "bottom 40%",
-      onEnter: () => setActive(index),
-      onEnterBack: () => setActive(index),
-    }));
-
-    const progress = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-      onUpdate: (self) => {
-        gsap.set(fill, { scaleY: self.progress, transformOrigin: "top center" });
-      },
-    });
-
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("resize", refresh);
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-      progress.kill();
-      window.removeEventListener("resize", refresh);
+    const updateProgress = () => {
+      const section = document.querySelector('.vpi-timeline');
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const total = Math.max(1, rect.height - window.innerHeight);
+      setProgress(Math.min(1, Math.max(0, -rect.top / total)));
     };
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    return () => { observer.disconnect(); window.removeEventListener('scroll', updateProgress); window.removeEventListener('resize', updateProgress); };
   }, []);
 
   return (
-    <section ref={sectionRef} className="vpi-timeline" data-theme="white" aria-labelledby="vpi-timeline-title">
-      <div className="page-pad vpi-timeline-intro">
-        <div>
-          <span className="eyebrow gold">VPI / OUR JOURNEY</span>
-          <h2 id="vpi-timeline-title">From vision to <em>innovation</em></h2>
-        </div>
+    <section className="vpi-timeline" aria-labelledby="vpi-timeline-title">
+      <div className="vpi-timeline-intro page-pad">
+        <div><span className="eyebrow cyan">VPI / OUR JOURNEY</span><h2 id="vpi-timeline-title">From vision to <em>innovation</em></h2></div>
         <p className="page-lead">A living timeline of the milestones that shaped VPI Innovative Solutions, from our founding legacy to advanced CNC manufacturing and our next phase of growth.</p>
       </div>
-      <div className="page-pad vpi-timeline-body">
-        <div className="vpi-timeline-line" ref={lineRef}><span ref={fillRef} /></div>
+      <div className="vpi-timeline-body page-pad">
+        <div className="vpi-timeline-line" aria-hidden="true"><span style={{ transform: `scaleY(${progress})` }} /></div>
         <div className="vpi-timeline-list">
           {milestones.map(([year, title, copy], index) => (
-            <article key={year} data-milestone={index} className={`vpi-timeline-item ${active === index ? "is-active" : ""}`}>
-              <div className="vpi-timeline-marker"><span>{String(index + 1).padStart(2, "0")}</span></div>
+            <article ref={el => { itemRefs.current[index] = el; }} key={year} data-milestone={index} className={`vpi-timeline-item ${active === index ? 'is-active' : ''}`}>
+              <div className="vpi-timeline-marker"><span>{String(index + 1).padStart(2, '0')}</span></div>
               <div className="vpi-timeline-year">{year}</div>
-              <div className="vpi-timeline-card">
-                <span className="service-number gold">{year}</span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </div>
+              <div className="vpi-timeline-card"><span className="service-number">{year}</span><h3>{title}</h3><p>{copy}</p></div>
             </article>
           ))}
         </div>
       </div>
-      <div className="page-pad vpi-timeline-end"><ArrowDown size={16} /><span>SCROLL TO CONTINUE</span></div>
+      <div className="vpi-timeline-end page-pad"><ArrowDown size={16} /><span>SCROLL TO CONTINUE</span></div>
     </section>
   );
 }

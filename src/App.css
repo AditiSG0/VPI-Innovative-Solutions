@@ -1170,3 +1170,76 @@ html, body, #root, .site-shell {
 
 /* Industry hero titles: names only */
 .industry-page .inner-hero-content h1{max-width:900px}.industry-page .inner-hero-content p{display:none}
+
+
+/* AUDIT FIXES - stable route rendering, readable type, correct timeline, visible wordmark */
+.logo-wordmark {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  color: #fff;
+  font: 600 14px/1.1 var(--display, Inter, sans-serif);
+  letter-spacing: .01em;
+}
+.site-header .logo { min-width: max-content; }
+
+.industry-detail-content { background:#e9eaf0; color:#121212; padding-top:8rem; padding-bottom:8rem; }
+.industry-detail-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,.85fr); gap:clamp(3rem,7vw,8rem); align-items:center; }
+.industry-detail-grid h2, .industry-focus h2 { margin:.8rem 0 1.5rem; font-size:clamp(3rem,6vw,6.5rem); line-height:.88; letter-spacing:-.04em; }
+.industry-detail-grid h2 em, .industry-focus h2 em { color:#4050e3; }
+.industry-detail-grid .page-lead { max-width:720px; white-space:pre-line; }
+.industry-detail-image { min-height:430px; overflow:hidden; background:#121212; }
+.industry-detail-image img { width:100%; height:100%; min-height:430px; object-fit:cover; display:block; }
+.industry-detail-blocks { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:6rem; }
+.industry-detail-blocks h3 { font-size:1.8rem; margin:1rem 0 1.4rem; }
+.industry-focus { background:#121212; color:#fff; padding-top:8rem; padding-bottom:8rem; }
+.industry-focus .page-lead { color:#dfe1e7 !important; max-width:850px; }
+.industry-gallery { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; margin:4rem 0; }
+.industry-gallery div { aspect-ratio:1.15; overflow:hidden; background:#1b1b1b; }
+.industry-gallery img { width:100%; height:100%; object-fit:cover; transition:transform .7s ease; }
+.industry-gallery div:hover img { transform:scale(1.05); }
+
+/* The old timeline override targeted every direct child and broke the component hierarchy. */
+.vpi-timeline { background:#121212 !important; color:#fff !important; padding:clamp(6rem,9vw,10rem) 0 5rem !important; }
+.vpi-timeline-intro { display:grid !important; grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr) !important; gap:4rem !important; align-items:end !important; max-width:none !important; }
+.vpi-timeline-intro h2 { color:#fff !important; margin:.6rem 0 0 !important; font-size:clamp(3.2rem,6vw,7rem) !important; line-height:.86 !important; }
+.vpi-timeline-intro h2 em { color:#4050e3 !important; }
+.vpi-timeline-intro .page-lead { color:#dfe1e7 !important; }
+.vpi-timeline-body { position:relative; padding-top:5rem !important; }
+.vpi-timeline-line { position:absolute !important; left:clamp(2rem,8vw,8rem) !important; top:5rem !important; bottom:2rem !important; width:2px !important; background:rgba(255,255,255,.16) !important; overflow:hidden !important; }
+.vpi-timeline-line span { display:block; position:absolute !important; inset:0 0 auto !important; width:100% !important; height:100% !important; background:#4050e3 !important; transform-origin:top center !important; }
+.vpi-timeline-list { display:grid !important; gap:2rem !important; max-width:none !important; margin:0 !important; }
+.vpi-timeline-item { display:grid !important; grid-template-columns:clamp(4rem,9vw,8rem) minmax(110px,.55fr) minmax(0,1fr) !important; align-items:start !important; gap:1.5rem !important; min-height:170px !important; opacity:.48 !important; background:transparent !important; padding:0 !important; border:0 !important; transition:opacity .4s ease, transform .4s ease !important; }
+.vpi-timeline-item.is-active { opacity:1 !important; transform:translateX(8px) !important; }
+.vpi-timeline-marker { display:flex !important; justify-content:center !important; position:relative !important; z-index:2 !important; }
+.vpi-timeline-marker span { width:2rem !important; height:2rem !important; border:2px solid #555 !important; border-radius:50% !important; display:grid !important; place-items:center !important; background:#121212 !important; color:#fff !important; font:600 .55rem var(--mono) !important; }
+.vpi-timeline-item.is-active .vpi-timeline-marker span { border-color:#4050e3 !important; background:#4050e3 !important; color:#fff !important; }
+.vpi-timeline-year { padding-top:.25rem !important; color:#fff !important; font:600 .8rem var(--mono) !important; letter-spacing:.08em !important; }
+.vpi-timeline-card { background:#1b1b1b !important; border:1px solid rgba(255,255,255,.12) !important; padding:clamp(1.2rem,2.3vw,2rem) !important; }
+.vpi-timeline-card h3 { margin:.35rem 0 .5rem !important; color:#fff !important; font-size:clamp(1.5rem,2.4vw,2.5rem) !important; }
+.vpi-timeline-card p { margin:0 !important; color:#dfe1e7 !important; max-width:760px !important; line-height:1.7 !important; }
+.vpi-timeline-end { display:flex !important; gap:.6rem !important; align-items:center !important; justify-content:flex-end !important; color:#4050e3 !important; font:600 .7rem var(--mono) !important; letter-spacing:.14em !important; padding-top:2rem !important; }
+
+/* Services and all light sections must never rely on animation to reveal their copy. */
+.service-grid > div, .service-panel, .page-intro-content, .official-copy { opacity:1 !important; visibility:visible !important; }
+.service-panel { padding:2rem !important; min-height:230px; }
+.service-panel h3 { color:#121212 !important; }
+.service-panel p { color:#4a4b54 !important; }
+.vpi-company-detail, .vpi-company-section, .vpi-company-section h2, .vpi-company-section h3, .vpi-company-section p { opacity:1 !important; visibility:visible !important; }
+
+@media(max-width:860px){
+  .logo-wordmark { font-size:12px; }
+  .industry-detail-grid, .industry-detail-blocks { grid-template-columns:1fr; }
+  .industry-gallery { grid-template-columns:1fr 1fr; }
+  .vpi-timeline-intro { grid-template-columns:1fr !important; gap:1.5rem !important; }
+  .vpi-timeline-body { padding-left:1.1rem !important; padding-right:1.1rem !important; }
+  .vpi-timeline-line { left:1.6rem !important; }
+  .vpi-timeline-item { grid-template-columns:3rem 1fr !important; gap:.8rem !important; }
+  .vpi-timeline-year { grid-column:2 !important; padding-top:0 !important; order:-1 !important; }
+  .vpi-timeline-marker { grid-row:1 / span 2 !important; }
+  .vpi-timeline-card { grid-column:2 !important; }
+}
+@media(max-width:560px){
+  .logo-wordmark { font-size:11px; }
+  .industry-gallery { grid-template-columns:1fr; }
+}

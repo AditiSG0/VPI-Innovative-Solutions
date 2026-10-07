@@ -215,6 +215,45 @@ function OfficialPage({ eyebrow, title, accent, lead, kicker, image, paragraphs 
   );
 }
 
+function IndustryPage({ data }) {
+  const isRobotics = data.title === "Robotics Industry";
+  return (
+    <div className="industry-page">
+      <PageHero
+        number="01"
+        eyebrow="INDUSTRY"
+        title={data.title.replace(/ Industry$/i, "")}
+        lead="Precision engineering for demanding applications"
+        image={isRobotics ? "/vpi/industry/robotics.png" : data.hero}
+      />
+      <PageIntro kicker="VPI / INDUSTRY CAPABILITY" title={<>{data.title.replace(/ Industry$/i, "")} <em>Precision</em></>}>
+        <p className="page-lead">{data.summary}</p>
+      </PageIntro>
+      <section className="industry-detail-content page-pad" data-theme="steel">
+        <div className="industry-detail-grid">
+          <div>
+            <span className="eyebrow cyan">ENGINEERING & PROCESS</span>
+            <h2>Built around <em>precision</em>.</h2>
+            <p className="page-lead">{data.technical}</p>
+          </div>
+          <div className="industry-detail-image"><img src={data.image} alt={`${data.title} manufacturing`} loading="lazy" /></div>
+        </div>
+        <div className="industry-detail-blocks">
+          <div><span className="eyebrow cyan">MATERIALS</span><h3>Material capability</h3><div className="detail-list">{data.materials.map(item => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div></div>
+          <div><span className="eyebrow cyan">FINISHING</span><h3>{data.finishingTitle}</h3><div className="detail-list">{data.finishing.map(item => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div></div>
+        </div>
+      </section>
+      <section className="industry-focus page-pad" data-theme="dark">
+        <span className="eyebrow cyan">{data.focusTitle}</span>
+        <h2>{data.title.replace(/ Industry$/i, "")} <em>without compromise.</em></h2>
+        <p className="page-lead">{data.focus}</p>
+        <div className="industry-gallery">{data.gallery.map((src, i) => <div key={`${src}-${i}`}><img src={src} alt={`${data.title} VPI manufacturing view ${i+1}`} loading="lazy" /></div>)}</div>
+        <LinkButton to="/contact">TALK TO VPI</LinkButton>
+      </section>
+    </div>
+  );
+}
+
 export function AerospacePage() { return <IndustryPage data={industryData.aerospace} />; }
 
 export function IndustriesPage() {
