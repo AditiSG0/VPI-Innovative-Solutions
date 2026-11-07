@@ -66,6 +66,7 @@ const industries = [
 const industryData = {
   automotive: {
     title: "Automobile Industry",
+    heroDescription: "Precision manufacturing for the next generation of mobility.",
     video: "/videos/industries/automobile.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2706.jpg",
     slugTitle: "Automotive Industry",
@@ -81,6 +82,7 @@ const industryData = {
   },
   electronics: {
     title: "Electronics Industry",
+    heroDescription: "Micro-precision engineering for connected technologies.",
     video: "/videos/industries/electronics.mp4",
     hero: "/vpi/industry/electronics.png",
     image: machineImages[1],
@@ -108,6 +110,7 @@ const industryData = {
   },
   medical: {
     title: "Medical Industry",
+    heroDescription: "Precision components for medical equipment and critical healthcare applications.",
     video: "/videos/industries/medical.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2728.jpg",
     image: productImages.comp6,
@@ -122,6 +125,7 @@ const industryData = {
   },
   aerospace: {
     title: "Aerospace Industry",
+    heroDescription: "Advanced machining for demanding aviation and aerospace applications.",
     video: "/videos/industries/aerospace.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__16743.jpg",
     image: "/vpi/industry/aerospace.png",
@@ -234,7 +238,6 @@ function OfficialPage({ eyebrow, title, accent, lead, kicker, image, paragraphs 
 }
 
 function IndustryPage({ data }) {
-  const isRobotics = data.title === "Robotics Industry";
   return (
     <div className="industry-page">
       <IndustryVideoHero
@@ -242,7 +245,7 @@ function IndustryPage({ data }) {
         video={data.video}
         poster={data.hero}
         eyebrow={`PRECISION ENGINEERING / ${data.title.replace(/ Industry$/i, "").toUpperCase()}`}
-        description={data.heroLead || "Precision-engineered components for demanding applications."}
+        description={data.heroDescription}
       />
       <PageIntro kicker="VPI / INDUSTRY CAPABILITY" title={<>{data.title.replace(/ Industry$/i, "")} <em>Precision</em></>}>
         <p className="page-lead">{data.summary}</p>
