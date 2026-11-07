@@ -1495,3 +1495,23 @@ html, body, #root { background:#121212; }
   .management-stats-grid { grid-template-columns:1fr; }
   .footer-logo-medium { width:190px !important; }
 }
+
+
+/* Services page: explicit contrast rules for both dark cards and light capability area */
+.service-grid[data-theme="dark"] .service-panel{
+  background:#1b1b1f !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.12);
+}
+.service-grid[data-theme="dark"] .service-panel h3{color:#fff !important;line-height:1.05;}
+.service-grid[data-theme="dark"] .service-panel p{color:#e1e3e8 !important;font-size:.95rem;line-height:1.75;}
+.service-grid[data-theme="dark"] .service-number{color:#aab4ff !important;}
+.services-capabilities{padding-top:clamp(4rem,8vw,8rem);padding-bottom:clamp(4rem,8vw,8rem);background:#e9eaf0 !important;color:#171717 !important;}
+.services-capabilities h2,.services-capabilities h3,.services-capabilities .page-lead{color:#171717 !important;}
+.services-capabilities .eyebrow{color:#4050e3 !important;}
+.services-capabilities .detail-list{max-width:900px;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 2rem;margin-top:2rem;}
+.services-capabilities .detail-list>div{min-height:58px;align-items:center;padding:.9rem 0;color:#20222a !important;border-bottom:1px solid rgba(18,18,18,.16) !important;font:500 12px/1.55 var(--mono,monospace);letter-spacing:.035em;text-transform:none;}
+.services-capabilities .detail-list svg{color:#4050e3 !important;}
+.services-capabilities .page-lead{max-width:900px;margin-top:2rem;font-size:.95rem;line-height:1.8;}
+.services-capabilities .page-lead p{margin-bottom:1rem;color:#343943 !important;line-height:1.8;}
+@media(max-width:700px){.services-capabilities .detail-list{grid-template-columns:1fr}.service-grid{padding-top:4rem;padding-bottom:4rem}}
