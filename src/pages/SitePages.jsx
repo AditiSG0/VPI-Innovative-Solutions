@@ -154,7 +154,7 @@ const industryData = {
 
 };
 
-const vgHeaders = ["Model", "Spindle", "Max RPM", "Weight (kg)", "Operating Force (kN/kgf)", "Clamping Force (kN/kgf)", "Sleeve Stroke (mm)", "Min-Max l (mm)", "Min-Max n (mm)", "Min-Max u (mm)"];
+const vgHeaders = ["Model", "Spindle", "Maximum speed", "Weight (kg)", "Operating Force (kN/kgf)", "Clamping Force (kN/kgf)", "Sleeve Stroke (mm)", "Min-Max l (mm)", "Min-Max n (mm)", "Min-Max u (mm)"];
 const vgRows = [
   ["VG-20 A8-80", "A2-8", "3500", "23", "29.4 (3000)", "63.7 (6500)", "10", "5 - 60", "8 - 52", "7 - 42"],
   ["VG-20 A6-60", "A2-6", "4000", "11.35", "19.6 (2000)", "42.1 (4300)", "3", "2 - 25", "3 - 19", "4 - 22"],
