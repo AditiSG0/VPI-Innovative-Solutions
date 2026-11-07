@@ -11,6 +11,7 @@ import RoboticsShowcase from "@/components/RoboticsShowcase";
 import QuoteForm from "@/components/QuoteForm";
 import HeroScrollMedia from "@/components/HeroScrollMedia";
 import RoboticsLanding from "@/components/RoboticsLanding";
+import IndustryVideoHero from "@/components/IndustryVideoHero";
 import { CompanyDetail } from "@/components/VpiCompanyDetail";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -65,6 +66,7 @@ const industries = [
 const industryData = {
   automotive: {
     title: "Automobile Industry",
+    video: "/videos/industries/automobile.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2706.jpg",
     slugTitle: "Automotive Industry",
     image: machineImages[0],
@@ -79,6 +81,7 @@ const industryData = {
   },
   electronics: {
     title: "Electronics Industry",
+    video: "/videos/industries/electronics.mp4",
     hero: "/vpi/industry/electronics.png",
     image: machineImages[1],
     summary: "At VPI Innovative Solutions, we specialize in the manufacture of precision-machined components for the electronics and semiconductor industry, where compactness, accuracy, and surface quality are critical. Our machining systems are optimized for micro-scale components as small as 0.5 mm, ensuring precise dimensional control and consistent quality in every production batch.",
@@ -105,6 +108,7 @@ const industryData = {
   },
   medical: {
     title: "Medical Industry",
+    video: "/videos/industries/medical.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2728.jpg",
     image: productImages.comp6,
     summary: "At VPI Innovative Solutions, we manufacture precision components used in medical equipment and critical healthcare devices, where accuracy, reliability, and cleanliness are essential. Our machining processes and inspection controls ensure every part meets stringent biocompatibility and dimensional standards required in the medical domain.",
@@ -118,6 +122,7 @@ const industryData = {
   },
   aerospace: {
     title: "Aerospace Industry",
+    video: "/videos/industries/aerospace.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__16743.jpg",
     image: "/vpi/industry/aerospace.png",
     summary: "VPI supports aerospace and space applications with precision-engineered, mission-critical components where dimensional accuracy, material performance and repeatability are essential.",
@@ -232,12 +237,12 @@ function IndustryPage({ data }) {
   const isRobotics = data.title === "Robotics Industry";
   return (
     <div className="industry-page">
-      <PageHero
-        number="01"
-        eyebrow="INDUSTRY"
-        title={data.title.replace(/ Industry$/i, "")}
-        lead="Precision engineering for demanding applications"
-        image={isRobotics ? "/vpi/industry/robotics.png" : data.hero}
+      <IndustryVideoHero
+        industry={data.title.replace(/ Industry$/i, "")}
+        video={data.video}
+        poster={data.hero}
+        eyebrow={`PRECISION ENGINEERING / ${data.title.replace(/ Industry$/i, "").toUpperCase()}`}
+        description={data.heroLead || "Precision-engineered components for demanding applications."}
       />
       <PageIntro kicker="VPI / INDUSTRY CAPABILITY" title={<>{data.title.replace(/ Industry$/i, "")} <em>Precision</em></>}>
         <p className="page-lead">{data.summary}</p>
@@ -350,11 +355,11 @@ export function MedicalPage() { return <IndustryPage data={industryData.medical}
 export function ServicesPage() {
   const services = [
     ["01", "Custom Machining", "Tailored to exact design and tolerance requirements."],
-    ["02", "Precision Expertise", "Decades of experience in high-accuracy machining."],
-    ["03", "Scalable Solutions", "From single parts to batch runs with ease."],
+    ["02", "Precision Expertise", "Extensive experience in high-precision machining."],
+    ["03", "Scalable Solutions", "From one-off components to repeat production runs."],
     ["04", "Quality Control", "Integrated CMMs, tool presetters, and more."],
   ];
-  return <div><PageHero number="01" eyebrow="VPI’S SERVICES" title="PRECISION MANUFACTURING." accent="SCALABLE CAPABILITIES." lead="BUILT FOR INNOVATION" image="/vpi/heroes/services-hero.png" /><PageIntro kicker="Expertise You Can Trust" title={<>VPI'S <em>Services</em></>}><p className="page-lead">Discover custom CNC solutions built for complexity and scale. Our flexible production setup ensures precision, adaptability, and efficiency across every industry we serve.</p><LinkButton to="/contact">EXPLORE OUR SERVICES</LinkButton></PageIntro><section className="service-grid page-pad" data-theme="dark">{services.map(([number, title, copy]) => <Reveal key={number}><article className="service-panel" onMouseMove={spotlightMove}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p></article></Reveal>)}</section><section className="page-pad" data-theme="steel"><div className="section-heading-row"><div><span className="eyebrow cyan">Advanced Design & Machining Capabilities</span><h2>Our <em>Capabilities</em></h2></div></div><div className="detail-list">{["CNC Milling – 3, 4, and 5 Axis", "Sliding Head CNC – 9 to 13 Axis", "Turn-Mills – 5 to 9 Axis", "Turning Centers – 2 Axis", "CNC Grinding – 3 Axis", "EDM – 5 Axis"].map((item) => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div><div className="page-lead">{["Turn Mill: 9 Axis | 240 X 500", "Turn Mill: 7 Axis | 200 X 500", "Sliding Head Machines: 13 Axis | 32 X 330; 9 Axis | 16 X 220; 7 Axis | 20 X 220; 5 Axis | 26 X 280", "Vertical Machining Center: 3 Axis | 1020 X 560 X 560; 4 Axis | 760 X 500 X 600; 5 Axis | 500 x 450 x 450", "Horizontal Machining Center: 4 Axis | 900 X 700 X 700; 4 Axis | 310 X 310 X 330", "Wire EDM: 5 Axis | 600 X 450 X 400", "CNC Grinding: 3 Axis | 100 X 50; SG | 400 X 100"].map((item) => <p key={item}>{item}</p>)}</div></section><VpiVisionFooter /></div>;
+  return <div><PageHero number="01" eyebrow="VPI’S SERVICES" title="PRECISION MANUFACTURING." accent="SCALABLE CAPABILITIES." lead="BUILT FOR INNOVATION" image="/vpi/heroes/services-hero.png" /><PageIntro kicker="Expertise You Can Trust" title={<>VPI'S <em>Services</em></>}><p className="page-lead">Discover custom CNC solutions built for complexity and scale. Our flexible production setup ensures precision, adaptability, and efficiency across every industry we serve.</p><LinkButton to="/contact">EXPLORE OUR SERVICES</LinkButton></PageIntro><section className="service-grid page-pad" data-theme="dark">{services.map(([number, title, copy]) => <Reveal key={number}><article className="service-panel" onMouseMove={spotlightMove}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p></article></Reveal>)}</section><section className="page-pad services-capabilities" data-theme="steel"><div className="section-heading-row"><div><span className="eyebrow cyan">Advanced Design & Machining Capabilities</span><h2>Our <em>Capabilities</em></h2></div></div><div className="detail-list">{["CNC milling: 3-, 4- and 5-axis machining", "Sliding-head CNC machining: 9 to 13 axes", "Turn-mill machining: 5 to 9 axes", "CNC turning centres: 2 axes", "CNC grinding: 3 axes", "Electrical discharge machining (EDM): 5 axes"].map((item) => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div><div className="page-lead">{["Turn Mill: 9 Axis | 240 X 500", "Turn Mill: 7 Axis | 200 X 500", "Sliding Head Machines: 13 Axis | 32 X 330; 9 Axis | 16 X 220; 7 Axis | 20 X 220; 5 Axis | 26 X 280", "Vertical Machining Center: 3 Axis | 1020 X 560 X 560; 4 Axis | 760 X 500 X 600; 5 Axis | 500 x 450 x 450", "Horizontal Machining Center: 4 Axis | 900 X 700 X 700; 4 Axis | 310 X 310 X 330", "Wire EDM: 5 Axis | 600 X 450 X 400", "CNC Grinding: 3 Axis | 100 X 50; SG | 400 X 100"].map((item) => <p key={item}>{item}</p>)}</div></section><VpiVisionFooter /></div>;
 }
 
 export function ProductsPage() {
