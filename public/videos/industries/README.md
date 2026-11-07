@@ -6,7 +6,7 @@ Download the following individually selected Pexels clips and place the MP4 file
 |---|---|---|
 | Automobile | `automobile.mp4` | [Automated Car Factory — Engin Altundağ](https://www.pexels.com/video/automated-car-factory-6450803/) |
 | Electronics | `electronics.mp4` | [A Person Is Working on a Circuit Board — cottonbro studio](https://www.pexels.com/video/a-person-is-working-on-a-circuit-board-4709394/) |
-| Medical | `medical.mp4` | [Close-Up of a Scientist Using Laboratory Equipment — Mikhail Nilov](https://www.pexels.com/video/close-up-of-a-scientist-using-laboratory-equipment-8863360/) |
+| Medical | `medical.mp4` | [Biotech Lab Centrifuge Operating with Precision — Dominik Zítka](https://www.pexels.com/video/biotech-lab-centrifuge-operating-with-precision-31767911/) |
 | Aerospace | `aerospace.mp4` | [Close-Up of Airplane Turbine at Airport — Joerg Mangelsen](https://www.pexels.com/video/close-up-of-airplane-turbine-at-airport-33522402/) |
 
 ## Production requirements
