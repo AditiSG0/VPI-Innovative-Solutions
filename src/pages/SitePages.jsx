@@ -67,7 +67,7 @@ const industryData = {
   automotive: {
     title: "Automobile Industry",
     heroDescription: "Precision manufacturing for the next generation of mobility.",
-    video: "/Industries/6450803-hd_1920_1080_25fps.mp4",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/6450803-hd_1920_1080_25fps.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2706.jpg",
     slugTitle: "Automotive Industry",
     image: machineImages[0],
@@ -83,7 +83,7 @@ const industryData = {
   electronics: {
     title: "Electronics Industry",
     heroDescription: "Micro-precision engineering for connected technologies.",
-    video: "/Industries/4709394-uhd_4096_2160_25fps.mp4",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/4709394-uhd_4096_2160_25fps.mp4",
     hero: "/vpi/industry/electronics.png",
     image: machineImages[1],
     summary: "At VPI Innovative Solutions, we specialize in the manufacture of precision-machined components for the electronics and semiconductor industry, where compactness, accuracy, and surface quality are critical. Our machining systems are optimized for micro-scale components as small as 0.5 mm, ensuring precise dimensional control and consistent quality in every production batch.",
@@ -111,7 +111,7 @@ const industryData = {
   medical: {
     title: "Medical Industry",
     heroDescription: "Precision components for medical equipment and critical healthcare applications.",
-    video: "/Industries/8381327-uhd_3840_2160_25fps.mp4",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/8381327-uhd_3840_2160_25fps.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2728.jpg",
     image: productImages.comp6,
     summary: "At VPI Innovative Solutions, we manufacture precision components used in medical equipment and critical healthcare devices, where accuracy, reliability, and cleanliness are essential. Our machining processes and inspection controls ensure every part meets stringent biocompatibility and dimensional standards required in the medical domain.",
@@ -126,7 +126,7 @@ const industryData = {
   aerospace: {
     title: "Aerospace Industry",
     heroDescription: "Advanced machining for demanding aviation and aerospace applications.",
-    video: "/Industries/14256007_2560_1440_30fps.mp4",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/14256007_2560_1440_30fps.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__16743.jpg",
     image: "/vpi/industry/aerospace.png",
     summary: "VPI supports aerospace and space applications with precision-engineered, mission-critical components where dimensional accuracy, material performance and repeatability are essential.",
