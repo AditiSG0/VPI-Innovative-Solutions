@@ -11,6 +11,7 @@ import RoboticsShowcase from "@/components/RoboticsShowcase";
 import QuoteForm from "@/components/QuoteForm";
 import HeroScrollMedia from "@/components/HeroScrollMedia";
 import RoboticsLanding from "@/components/RoboticsLanding";
+import IndustryVideoHero from "@/components/IndustryVideoHero";
 import { CompanyDetail } from "@/components/VpiCompanyDetail";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -65,6 +66,8 @@ const industries = [
 const industryData = {
   automotive: {
     title: "Automobile Industry",
+    heroDescription: "Precision manufacturing for the next generation of mobility.",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/6450803-hd_1920_1080_25fps.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2706.jpg",
     slugTitle: "Automotive Industry",
     image: machineImages[0],
@@ -79,6 +82,8 @@ const industryData = {
   },
   electronics: {
     title: "Electronics Industry",
+    heroDescription: "Micro-precision engineering for connected technologies.",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/4709394-uhd_4096_2160_25fps.mp4",
     hero: "/vpi/industry/electronics.png",
     image: machineImages[1],
     summary: "At VPI Innovative Solutions, we specialize in the manufacture of precision-machined components for the electronics and semiconductor industry, where compactness, accuracy, and surface quality are critical. Our machining systems are optimized for micro-scale components as small as 0.5 mm, ensuring precise dimensional control and consistent quality in every production batch.",
@@ -105,6 +110,8 @@ const industryData = {
   },
   medical: {
     title: "Medical Industry",
+    heroDescription: "Precision components for medical equipment and critical healthcare applications.",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/8381327-uhd_3840_2160_25fps.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/IMG_2728.jpg",
     image: productImages.comp6,
     summary: "At VPI Innovative Solutions, we manufacture precision components used in medical equipment and critical healthcare devices, where accuracy, reliability, and cleanliness are essential. Our machining processes and inspection controls ensure every part meets stringent biocompatibility and dimensional standards required in the medical domain.",
@@ -118,6 +125,8 @@ const industryData = {
   },
   aerospace: {
     title: "Aerospace Industry",
+    heroDescription: "Advanced machining for demanding aviation and aerospace applications.",
+    video: "https://raw.githubusercontent.com/AditiSG0/VPI-Innovative-Solutions/main/public/Industries/14256007_2560_1440_30fps.mp4",
     hero: "https://vpiinnovativesolutions.com/wp-content/uploads/2025/11/freepik__the-style-is-candid-image-photography-with-natural__16743.jpg",
     image: "/vpi/industry/aerospace.png",
     summary: "VPI supports aerospace and space applications with precision-engineered, mission-critical components where dimensional accuracy, material performance and repeatability are essential.",
@@ -145,7 +154,7 @@ const industryData = {
 
 };
 
-const vgHeaders = ["Model", "Spindle", "Max RPM", "Weight (kg)", "Operating Force (kN/kgf)", "Clamping Force (kN/kgf)", "Sleeve Stroke (mm)", "Min-Max l (mm)", "Min-Max n (mm)", "Min-Max u (mm)"];
+const vgHeaders = ["Model", "Spindle", "Maximum speed", "Weight (kg)", "Operating Force (kN/kgf)", "Clamping Force (kN/kgf)", "Sleeve Stroke (mm)", "Min-Max l (mm)", "Min-Max n (mm)", "Min-Max u (mm)"];
 const vgRows = [
   ["VG-20 A8-80", "A2-8", "3500", "23", "29.4 (3000)", "63.7 (6500)", "10", "5 - 60", "8 - 52", "7 - 42"],
   ["VG-20 A6-60", "A2-6", "4000", "11.35", "19.6 (2000)", "42.1 (4300)", "3", "2 - 25", "3 - 19", "4 - 22"],
@@ -229,15 +238,14 @@ function OfficialPage({ eyebrow, title, accent, lead, kicker, image, paragraphs 
 }
 
 function IndustryPage({ data }) {
-  const isRobotics = data.title === "Robotics Industry";
   return (
     <div className="industry-page">
-      <PageHero
-        number="01"
-        eyebrow="INDUSTRY"
-        title={data.title.replace(/ Industry$/i, "")}
-        lead="Precision engineering for demanding applications"
-        image={isRobotics ? "/vpi/industry/robotics.png" : data.hero}
+      <IndustryVideoHero
+        industry={data.title.replace(/ Industry$/i, "")}
+        video={data.video}
+        poster={data.hero}
+        eyebrow={`PRECISION ENGINEERING / ${data.title.replace(/ Industry$/i, "").toUpperCase()}`}
+        description={data.heroDescription}
       />
       <PageIntro kicker="VPI / INDUSTRY CAPABILITY" title={<>{data.title.replace(/ Industry$/i, "")} <em>Precision</em></>}>
         <p className="page-lead">{data.summary}</p>
@@ -279,9 +287,9 @@ export function AerospacePage() { return <IndustryPage data={industryData.aerosp
 
 export function IndustriesPage() {
   return <div className="industries-page">
-    <PageHero number="01" eyebrow="INDUSTRIES" title="Strength You Can Shape." accent="Industries We Empower" lead="Precision Engineering Reimagined | VPI Innovative Solutions" image="/vpi/industry/automotive.png" />
+    <PageHero number="01" eyebrow="INDUSTRIES" title="Strength You Can Shape." accent="Industries We Empower" lead="Precision Engineering by VPI Innovative Solutions" image="/vpi/industry/automotive.png" />
     <PageIntro kicker="Precision Engineering for Tomorrow's Challenges" title={<>Precision Engineering<br /><em>for Tomorrow’s Challenges</em></>}>
-      <p className="page-lead">At VPI Innovative Solutions, we don't just manufacture components. We engineer possibilities. Our machining, tooling, and design expertise support industries where precision is mission-critical.</p>
+      <p className="page-lead">At VPI Innovative Solutions, we do more than manufacture components. We engineer possibilities. Our machining, tooling and design expertise support industries where precision is essential.</p>
     </PageIntro>
     <section className="industry-overview page-pad" data-theme="dark">
       <div className="industry-parallax">
@@ -293,7 +301,7 @@ export function IndustriesPage() {
 }
 
 function SimpleIndustryPage({ title, copy }) {
-  return <div><PageHero number="01" eyebrow="INDUSTRY" title={title} accent="" lead="Welcome to VPI Innovative Industries" image={productImages.components} /><PageIntro kicker="Industries We Empower" title={<>{title}<br /><em>Precision Engineering</em></>}><p className="page-lead">{copy}</p><LinkButton to="/contact">CONTACT US</LinkButton></PageIntro><VpiVisionFooter /></div>;
+  return <div><PageHero number="01" eyebrow="INDUSTRY" title={title} accent="" lead="Welcome to VPI Innovative Solutions" image={productImages.components} /><PageIntro kicker="Industries We Empower" title={<>{title}<br /><em>Precision Engineering</em></>}><p className="page-lead">{copy}</p><LinkButton to="/contact">CONTACT US</LinkButton></PageIntro><VpiVisionFooter /></div>;
 }
 
 export function HomePage() {
@@ -350,37 +358,37 @@ export function MedicalPage() { return <IndustryPage data={industryData.medical}
 export function ServicesPage() {
   const services = [
     ["01", "Custom Machining", "Tailored to exact design and tolerance requirements."],
-    ["02", "Precision Expertise", "Decades of experience in high-accuracy machining."],
-    ["03", "Scalable Solutions", "From single parts to batch runs with ease."],
+    ["02", "Precision Expertise", "Extensive experience in high-precision machining."],
+    ["03", "Scalable Solutions", "From one-off components to repeat production runs."],
     ["04", "Quality Control", "Integrated CMMs, tool presetters, and more."],
   ];
-  return <div><PageHero number="01" eyebrow="VPI’S SERVICES" title="PRECISION MANUFACTURING." accent="SCALABLE CAPABILITIES." lead="BUILT FOR INNOVATION" image="/vpi/heroes/services-hero.png" /><PageIntro kicker="Expertise You Can Trust" title={<>VPI'S <em>Services</em></>}><p className="page-lead">Discover custom CNC solutions built for complexity and scale. Our flexible production setup ensures precision, adaptability, and efficiency across every industry we serve.</p><LinkButton to="/contact">EXPLORE OUR SERVICES</LinkButton></PageIntro><section className="service-grid page-pad" data-theme="dark">{services.map(([number, title, copy]) => <Reveal key={number}><article className="service-panel" onMouseMove={spotlightMove}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p></article></Reveal>)}</section><section className="page-pad" data-theme="steel"><div className="section-heading-row"><div><span className="eyebrow cyan">Advanced Design & Machining Capabilities</span><h2>Our <em>Capabilities</em></h2></div></div><div className="detail-list">{["CNC Milling – 3, 4, and 5 Axis", "Sliding Head CNC – 9 to 13 Axis", "Turn-Mills – 5 to 9 Axis", "Turning Centers – 2 Axis", "CNC Grinding – 3 Axis", "EDM – 5 Axis"].map((item) => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div><div className="page-lead">{["Turn Mill: 9 Axis | 240 X 500", "Turn Mill: 7 Axis | 200 X 500", "Sliding Head Machines: 13 Axis | 32 X 330; 9 Axis | 16 X 220; 7 Axis | 20 X 220; 5 Axis | 26 X 280", "Vertical Machining Center: 3 Axis | 1020 X 560 X 560; 4 Axis | 760 X 500 X 600; 5 Axis | 500 x 450 x 450", "Horizontal Machining Center: 4 Axis | 900 X 700 X 700; 4 Axis | 310 X 310 X 330", "Wire EDM: 5 Axis | 600 X 450 X 400", "CNC Grinding: 3 Axis | 100 X 50; SG | 400 X 100"].map((item) => <p key={item}>{item}</p>)}</div></section><VpiVisionFooter /></div>;
+  return <div><PageHero number="01" eyebrow="VPI’S SERVICES" title="PRECISION MANUFACTURING." accent="SCALABLE CAPABILITIES." lead="BUILT FOR INNOVATION" image="/vpi/heroes/services-hero.png" /><PageIntro kicker="Expertise You Can Trust" title={<>VPI'S <em>Services</em></>}><p className="page-lead">Explore custom CNC machining solutions designed for complex components and production at scale. Our flexible production capabilities support precision, adaptability and efficiency across the industries we serve.</p><LinkButton to="/contact">EXPLORE OUR SERVICES</LinkButton></PageIntro><section className="service-grid page-pad" data-theme="dark">{services.map(([number, title, copy]) => <Reveal key={number}><article className="service-panel" onMouseMove={spotlightMove}><span className="service-number">{number}</span><h3>{title}</h3><p>{copy}</p></article></Reveal>)}</section><section className="page-pad services-capabilities" data-theme="steel"><div className="section-heading-row"><div><span className="eyebrow cyan">Advanced Design & Machining Capabilities</span><h2>Our <em>Capabilities</em></h2></div></div><div className="detail-list">{["CNC milling: 3-, 4- and 5-axis machining", "Sliding-head CNC machining: 9 to 13 axes", "Turn-mill machining: 5 to 9 axes", "CNC turning centres: 2 axes", "CNC grinding: 3 axes", "Electrical discharge machining (EDM): 5 axes"].map((item) => <div key={item}><CheckCircle2 size={16}/><span>{item}</span></div>)}</div><div className="page-lead">{["Turn Mill: 9 Axis | 240 X 500", "Turn Mill: 7 Axis | 200 X 500", "Sliding Head Machines: 13 Axis | 32 X 330; 9 Axis | 16 X 220; 7 Axis | 20 X 220; 5 Axis | 26 X 280", "Vertical Machining Center: 3 Axis | 1020 X 560 X 560; 4 Axis | 760 X 500 X 600; 5 Axis | 500 x 450 x 450", "Horizontal Machining Center: 4 Axis | 900 X 700 X 700; 4 Axis | 310 X 310 X 330", "Wire EDM: 5 Axis | 600 X 450 X 400", "CNC Grinding: 3 Axis | 100 X 50; SG | 400 X 100"].map((item) => <p key={item}>{item}</p>)}</div></section><VpiVisionFooter /></div>;
 }
 
 export function ProductsPage() {
-  return <div><PageHero number="01" eyebrow="PRODUCTS" title="VPI’s Premium" accent="line." lead="VPI Product Solutions" image={productImages.lineup} /><PageIntro kicker="CNC Collet Chucks & Revolving Centers" title={<>Precision CNC<br /><em>Tooling Solutions</em></>}><p className="page-lead">At VPI, we deliver precision-engineered metal components and assemblies tailored to meet the highest industry standards. Our product range includes custom CNC-machined parts, metal enclosures, brackets, shafts, and precision tools designed for durability and performance.</p><div className="detail-list">{["High-precision CNC machining", "Custom metal components", "Durable and high-performance"].map((x) => <div key={x}><CheckCircle2 size={16}/><span>{x}</span></div>)}</div></PageIntro><section className="media-grid page-pad" data-theme="dark">{[[productImages.collet,"VPI CNC Collet Chucks"],[productImages.components,"VPI Precision Components"],[productImages.lineup,"CNC Collet Chucks & Revolving Centers"]].map(([image,title]) => <Reveal key={title}><div className="media-card"><div className="media-card-image"><img src={image} alt={title} loading="lazy" /></div><div className="media-card-body"><span className="service-number">VPI PRODUCT SOLUTIONS</span><h3>{title}</h3></div></div></Reveal>)}</section><section className="page-pad" data-theme="steel"><div className="detail-list"><div><CheckCircle2 size={16}/><span>High-volume production</span></div><div><CheckCircle2 size={16}/><span>Specialized prototyping</span></div><div><CheckCircle2 size={16}/><span>Advanced manufacturing</span></div></div><LinkButton to="/products/cnc-collet-chucks">REQUEST PRODUCT DETAILS</LinkButton></section><VpiVisionFooter /></div>;
+  return <div><PageHero number="01" eyebrow="PRODUCTS" title="VPI’s Premium" accent="line." lead="VPI Product Solutions" image={productImages.lineup} /><PageIntro kicker="CNC Collet Chucks and Revolving Centres" title={<>Precision CNC<br /><em>Tooling Solutions</em></>}><p className="page-lead">VPI manufactures precision-engineered metal components and assemblies to meet demanding industry requirements. Our product range includes custom CNC-machined parts, metal enclosures, brackets, shafts, and precision tools designed for durability and performance.</p><div className="detail-list">{["High-precision CNC machining", "Custom metal components", "Durable and high-performance"].map((x) => <div key={x}><CheckCircle2 size={16}/><span>{x}</span></div>)}</div></PageIntro><section className="media-grid page-pad" data-theme="dark">{[[productImages.collet,"VPI CNC Collet Chucks"],[productImages.components,"VPI Precision Components"],[productImages.lineup,"CNC Collet Chucks and Revolving Centres"]].map(([image,title]) => <Reveal key={title}><div className="media-card"><div className="media-card-image"><img src={image} alt={title} loading="lazy" /></div><div className="media-card-body"><span className="service-number">VPI PRODUCT SOLUTIONS</span><h3>{title}</h3></div></div></Reveal>)}</section><section className="page-pad" data-theme="steel"><div className="detail-list"><div><CheckCircle2 size={16}/><span>High-volume production</span></div><div><CheckCircle2 size={16}/><span>Specialised prototyping</span></div><div><CheckCircle2 size={16}/><span>Advanced manufacturing</span></div></div><LinkButton to="/products/cnc-collet-chucks">REQUEST PRODUCT DETAILS</LinkButton></section><VpiVisionFooter /></div>;
 }
 
 export function CNCColletChucksPage() {
-  return <div><PageHero number="01" eyebrow="CNC COLLET CHUCKS" title="VG-20 CNC Collet" accent="Chuck" lead="Precision-engineered CNC Collet Chuck designed for accuracy, rigidity, and durability in high-speed machining applications" image={productImages.collet} /><PageIntro kicker="Key Features" title={<>VG-20 <em>Collet Chuck</em></>}><div className="detail-list">{["High Precision: Exceptional concentricity for precision turning operations with micron-level accuracy", "Optimized Design: Lightweight, compact structure for fast acceleration and minimal vibration", "Superior Durability: Built with premium materials and precision engineering for long-lasting performance", "Versatile Compatibility: Works seamlessly with a wide range of CNC lathes and machining centers", "Flexible Applications: Ideal for both high-volume production and precision toolroom environments"].map((x) => <div key={x}><CheckCircle2 size={16}/><span>{x}</span></div>)}</div><LinkButton to="/contact">GET QUOTE</LinkButton></PageIntro><section className="product-feature-showcase page-pad" data-theme="navy"><div className="product-feature-image"><img src={productImages.collet} alt="VPI CNC Collet Chuck" /></div><div className="product-feature-copy"><span className="eyebrow gold">VG-20 / PRODUCT DETAIL</span><h2>Engineered for <em>precision</em></h2><p className="page-lead">High-precision collet chucks designed for maximum grip and minimal runout in CNC applications.</p><div className="product-feature-points"><div><span>01</span><b>Ultra-precise concentricity</b></div><div><span>02</span><b>Quick-change functionality</b></div><div><span>03</span><b>Extended tool life</b></div></div></div></section><section className="spec-section page-pad" data-theme="dark"><span className="eyebrow cyan">Technical Specifications</span><div className="spec-table">{[["Model","VG-20"],["Max RPM","4500 RPM"],["Clamping Range","Ø16mm - Ø50mm"],["Weight","3.5 kg"],["Mounting Type","A2-5 Spindle Nose"]].map(([a,b]) => <div className="spec-row" key={a}><span>{a}</span><strong>{b}</strong></div>)}</div></section><RangeSection kicker="VG-20 Collet Chuck Full Specifications" title="VG-20" accent="Specifications" headers={vgHeaders} rows={vgRows} note="VG-20 CNC Collet Chuck" prefix="vg20" /><section className="page-pad" data-theme="steel"><span className="eyebrow cyan">Applications</span><h2>Manufacturing <em>Industries</em></h2><div className="detail-list">{["Automotive components", "Aerospace parts", "Medical devices", "General machining", "Precision turning", "High-speed machining", "Small batch production", "Mass production", "Prototype development"].map((x) => <div key={x}><CheckCircle2 size={16}/><span>{x}</span></div>)}</div></section><VpiVisionFooter /></div>;
+  return <div><PageHero number="01" eyebrow="CNC COLLET CHUCKS" title="VG-20 CNC Collet" accent="Chuck" lead="The VG-20 CNC collet chuck is precision-engineered for accuracy, rigidity and durability in high-speed machining applications" image={productImages.collet} /><PageIntro kicker="Key Features" title={<>VG-20 <em>Collet Chuck</em></>}><div className="detail-list">{["High Precision: Excellent concentricity for precision turning operations, with micron-level accuracy", "Optimised Design: A lightweight, compact design that supports rapid acceleration and minimises vibration", "Superior Durability: Manufactured from high-quality materials and precision-engineered for long-term performance", "Versatile Compatibility: Compatible with a wide range of CNC lathes and machining centres", "Flexible Applications: Suitable for both high-volume production and precision toolroom applications"].map((x) => <div key={x}><CheckCircle2 size={16}/><span>{x}</span></div>)}</div><LinkButton to="/contact">REQUEST A QUOTE</LinkButton></PageIntro><section className="product-feature-showcase page-pad" data-theme="navy"><div className="product-feature-image"><img src={productImages.collet} alt="VPI CNC Collet Chuck" /></div><div className="product-feature-copy"><span className="eyebrow gold">VG-20 / PRODUCT DETAIL</span><h2>Engineered for <em>precision</em></h2><p className="page-lead">High-precision collet chucks designed for maximum grip and minimal runout in CNC applications.</p><div className="product-feature-points"><div><span>01</span><b>Ultra-precise concentricity</b></div><div><span>02</span><b>Quick-change functionality</b></div><div><span>03</span><b>Extended tool life</b></div></div></div></section><section className="spec-section page-pad" data-theme="dark"><span className="eyebrow cyan">Technical Specifications</span><div className="spec-table">{[["Model","VG-20"],["Maximum speed","4500 RPM"],["Clamping range","Ø16mm - Ø50mm"],["Weight","3.5 kg"],["Mounting type","A2-5 Spindle Nose"]].map(([a,b]) => <div className="spec-row" key={a}><span>{a}</span><strong>{b}</strong></div>)}</div></section><RangeSection kicker="VG-20 Collet Chuck Full Specifications" title="VG-20" accent="Specifications" headers={vgHeaders} rows={vgRows} note="VG-20 CNC Collet Chuck" prefix="vg20" /><section className="page-pad" data-theme="steel"><span className="eyebrow cyan">Applications</span><h2>Manufacturing <em>Industries</em></h2><div className="detail-list">{["Automotive components", "Aerospace parts", "Medical devices", "General machining", "Precision turning", "High-speed machining", "Small-batch production", "Mass production", "Prototype development"].map((x) => <div key={x}><CheckCircle2 size={16}/><span>{x}</span></div>)}</div></section><VpiVisionFooter /></div>;
 }
 
-export function RevolvingCentresPage() { return <OfficialPage eyebrow="PRODUCTS" title="Revolving" accent="Centers" lead="Precision product solution" kicker="Revolving Centers" image={productImages.revolving} paragraphs={["Revolving Centers"]} />; }
+export function RevolvingCentresPage() { return <OfficialPage eyebrow="PRODUCTS" title="Revolving" accent="Centres" lead="Precision-engineered solutions" kicker="Revolving Centres" image={productImages.revolving} paragraphs={["Revolving Centres"]} />; }
 export function QuickChangeColletsPage() { return <ProductsPage />; }
 
 export function MediaPage() {
   const posts = [
-    ["01", "Next-Generation CNC Machining Technologies", "April 28, 2025", "Explore how VPI is revolutionizing precision manufacturing with advanced collet chuck systems that enhance productivity while minimizing downtime.", machineImages[0]],
-    ["02", "VPI Expands International Partnership Network", "May 2, 2025", "VPI Innovative Solutions announces strategic partnerships with leading European manufacturers to enhance global supply chain capabilities.", productImages.components],
-    ["03", "Introducing the VG-20 CNC Collet Chuck Series", "May 5, 2025", "Our newest precision-engineered solution delivers exceptional concentricity and stability for high-speed machining applications.", productImages.collet],
+    ["01", "Next-Generation CNC Machining Technologies", "April 28, 2025", "Explore how VPI is advancing precision manufacturing with advanced collet chuck systems that enhance productivity while minimizing downtime.", machineImages[0]],
+    ["02", "VPI Expands International Partnership Network", "May 2, 2025", "VPI Innovative Solutions has announced strategic partnerships with European manufacturers to strengthen its international network and supply-chain capabilities.", productImages.components],
+    ["03", "Introducing the VG-20 CNC Collet Chuck Series", "May 5, 2025", "Our latest precision-engineered solution delivers excellent concentricity and stability for high-speed machining applications.", productImages.collet],
   ];
-  return <div><PageHero number="01" eyebrow="MEDIA" title="VPI’s Innovative" accent="Media" lead="Blogs and Updates" image={productImages.lineup} /><PageIntro kicker="Blogs and Updates" title={<>Stay updated with the latest insights, trends, and <em>innovations</em> in the manufacturing industry.</>}><p className="page-lead">Our Blogs and Updates section brings you detailed articles, technical write-ups, and news on the cutting-edge projects we are working on, industry advancements, and much more.</p></PageIntro><section className="media-grid page-pad" data-theme="dark">{posts.map(([number,title,date,excerpt,image]) => <Reveal key={title}><article className="media-card"><div className="media-card-image"><img src={image} alt={title} loading="lazy" /></div><div className="media-card-body"><span className="service-number">{number}</span><h3>{title}</h3><div className="media-meta"><span>{date}</span><span>LinkedIn</span></div><p>{excerpt}</p><a href="https://www.linkedin.com/company/vpi-innovative-solutions-mysore" target="_blank" rel="noreferrer" className="text-link">READ ON LINKEDIN <ArrowUpRight size={14}/></a></div></article></Reveal>)}</section><VpiVisionFooter /></div>;
+  return <div><PageHero number="01" eyebrow="MEDIA" title="VPI’s Innovative" accent="Media" lead="Blog and Updates" image={productImages.lineup} /><PageIntro kicker="Blog and Updates" title={<>Stay updated with the latest insights, trends, and <em>innovations</em> in the manufacturing industry.</>}><p className="page-lead">Our blog and updates section features articles, technical insights and news about our projects, manufacturing developments and wider industry trends.</p></PageIntro><section className="media-grid page-pad" data-theme="dark">{posts.map(([number,title,date,excerpt,image]) => <Reveal key={title}><article className="media-card"><div className="media-card-image"><img src={image} alt={title} loading="lazy" /></div><div className="media-card-body"><span className="service-number">{number}</span><h3>{title}</h3><div className="media-meta"><span>{date}</span><span>LinkedIn</span></div><p>{excerpt}</p><a href="https://www.linkedin.com/company/vpi-innovative-solutions-mysore" target="_blank" rel="noreferrer" className="text-link">READ ON LINKEDIN <ArrowUpRight size={14}/></a></div></article></Reveal>)}</section><VpiVisionFooter /></div>;
 }
 
 export function ArticlePage() { const { slug } = useParams(); if (!slug) return <Navigate to="/media" replace />; return <MediaPage />; }
 
 export function CareerPage() {
-  const positions = ["Production Supervisor / Shift Supervisor", "Operators (Milling Centers, Swiss Turns, Mill Turns, Grinding, EDM Wire Cut, Lathe, Setter)", "Engineering Manager", "NPD Coordinator / Project Engineer", "Assistant Manager Purchase", "Quality Inspector", "Quality Engineer (APQP, PPAP, FMEA, etc.)", "Purchase Executive & Vendor Development Engineer"];
+  const positions = ["Production Supervisor / Shift Supervisor", "Operators (Milling Centres, Swiss Turns, Mill Turns, Grinding, EDM Wire Cut, Lathe, Setter)", "Engineering Manager", "NPD Coordinator / Project Engineer", "Assistant Manager Purchase", "Quality Inspector", "Quality Engineer (APQP, PPAP, FMEA, etc.)", "Purchase Executive & Vendor Development Engineer"];
   return <div><PageHero number="01" eyebrow="CAREER" title="Build the" accent="next cut" lead="Join Our Team" image="/vpi/heroes/career-hero.png" /><PageIntro kicker="Why Work With Us?" title={<>Work with <em>VPI</em></>}><div className="detail-list">{["Innovative Projects", "Accelerated Growth", "Collaborative Culture", "Continuous Learning", "Make an Impact", "Rewards & Benefits"].map((x) => <div key={x}><CheckCircle2 size={16}/><span>{x}</span></div>)}</div></PageIntro><section className="roles-section page-pad" data-theme="dark"><div className="section-heading-row"><div><span className="eyebrow cyan">Open Positions</span><h2>Current <em>Openings</em></h2></div></div><div className="roles-list">{positions.map((position, i) => <Reveal key={position}><div className="role-row"><span className="service-number">0{i+1}</span><h3>{position}</h3><span className="role-tag">MYSORE</span></div></Reveal>)}</div></section><VpiVisionFooter /></div>;
 }
 
