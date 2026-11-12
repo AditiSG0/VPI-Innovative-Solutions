@@ -12,7 +12,7 @@ const norm=v=>{const k=String(v||"").trim().toUpperCase().replace(/\s+/g," ");re
 const today=()=>new Date().toISOString().slice(0,10), fmt=n=>Number(n||0).toLocaleString("en-IN",{maximumFractionDigits:2});
 const blankMove={movement_date:today(),movement_type:"issue",material_name:"",part_number:"",grade:"",diameter:"",batch_no:"",work_order:"",quantity:"",uom:"kg",unit_rate:"",notes:""};
 const blankProd={production_date:today(),batch_no:"",work_order:"",part_number:"",planned_qty:"",actual_qty:"",rejected_qty:"",machine:"",shift:"",notes:""};
-const signed=r=>["opening","receipt","return","adjustment_in"].includes(r.movement_type)?Number(r.quantity):-Number(r.quantity);
+const signed=r=>["opening","receipt","return","adjustment_in"].includes(r.movement_type)?Number(r.quantity):["issue","adjustment_out"].includes(r.movement_type)?-Number(r.quantity):0;
 function parseDate(v){if(v instanceof Date)return v.toISOString().slice(0,10);if(typeof v==="number"){const d=XLSX.SSF.parse_date_code(v);return new Date(Date.UTC(d.y,d.m-1,d.d)).toISOString().slice(0,10);}const d=new Date(v);return Number.isNaN(d.getTime())?"":d.toISOString().slice(0,10);}
 export default function InventoryDashboard(){
  const [session,setSession]=useState(null),[email,setEmail]=useState(""),[password,setPassword]=useState(""),[loginError,setLoginError]=useState("");
