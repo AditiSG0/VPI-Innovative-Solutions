@@ -19,7 +19,7 @@ export default function InventoryDashboard(){
  const [tab,setTab]=useState("overview"),[month,setMonth]=useState(today().slice(0,7)),[moves,setMoves]=useState([]),[outputs,setOutputs]=useState([]);
  const [move,setMove]=useState(blankMove),[prod,setProd]=useState(blankProd),[busy,setBusy]=useState(false),[notice,setNotice]=useState("");
  useEffect(()=>{if(!db)return;db.auth.getSession().then(({data})=>setSession(data.session));const {data:{subscription}}=db.auth.onAuthStateChange((_e,s)=>setSession(s));return()=>subscription.unsubscribe();},[]);
- const authorised=!!session&&(allow.length===0||allow.includes((session.user.email||"").toLowerCase()));
+ const authorised=!!session&&allow.length>0&&allow.includes((session.user.email||"").toLowerCase());
  useEffect(()=>{if(authorised)load();},[authorised,month]);
  async function load(){setBusy(true);const end=new Date(Number(month.slice(0,4)),Number(month.slice(5,7)),0).toISOString().slice(0,10),start=month+"-01";const [a,b]=await Promise.all([db.from("inventory_transactions").select("*").lte("movement_date",end).order("movement_date"),db.from("production_entries").select("*").gte("production_date",start).lte("production_date",end).order("production_date")]);if(a.error||b.error)setNotice(a.error?.message||b.error?.message);else{setMoves(a.data||[]);setOutputs(b.data||[]);}setBusy(false);}
  async function signIn(e){e.preventDefault();const {error}=await db.auth.signInWithPassword({email,password});if(error)setLoginError(error.message);}
