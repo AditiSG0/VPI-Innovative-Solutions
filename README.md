@@ -34,3 +34,16 @@ Open `http://localhost:3000`.
 - Career hero now reads “Build the next cut” with “Join Our Team” as the supporting line.
 - Products hero now reads “VPI’s Premium line.”
 - Final theme: #4050e3, #121212, #e9eaf0, with white highlights and high-contrast text.
+
+
+## Private VPI Inventory Dashboard
+
+A separate management-only React dashboard is available at `/inventory`. It supports daily raw-material movement entry, batch-linked production entries, month filtering, dashboard charts, CSV export, and Excel/CSV import.
+
+Before deployment, follow [docs/INVENTORY_SETUP.md](docs/INVENTORY_SETUP.md):
+- Create the Supabase project and run `supabase/schema.sql`.
+- Invite management users and add their Auth UUIDs to `vpi_management_users`.
+- Set `REACT_APP_SUPABASE_URL`, `REACT_APP_SUPABASE_ANON_KEY`, and `REACT_APP_MANAGEMENT_EMAILS` in Vercel.
+- Redeploy the app.
+
+The dashboard uses Supabase Auth and row-level security. Never put a service-role key in frontend environment variables. Historical opening balances must be imported and reconciled before the calculated stock is treated as an official balance.
