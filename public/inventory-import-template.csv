@@ -1,0 +1,4 @@
+Date,Type,Material Name,Quantity,Part Number,Grade,Diameter,Batch No,Work Order,UOM,Unit Rate,Notes
+2026-11-01,opening,SS,100,,,,,OPENING-2026-11,kg,,
+2026-11-02,receipt,MS BRIGHT,25,,,,,PO-EXAMPLE,kg,,
+2026-11-03,issue,SS,12,,304,,BATCH-EXAMPLE,WO-EXAMPLE,kg,,
